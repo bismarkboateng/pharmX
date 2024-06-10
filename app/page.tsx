@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter()
 
   const route = () => {
-    router.push(option === "patient" ? "/patient" : "/pharmacist")
+    router.push(option === "patient" ? "/patient/signup" : "/pharmacist")
   }
 
   return (

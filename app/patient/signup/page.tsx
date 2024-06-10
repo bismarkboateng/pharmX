@@ -10,7 +10,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth"
 import { createPatient } from "@/lib/actions/user.actions";
 import { useRouter } from "next/navigation";
 
-export default function Patient() {
+export default function Signup() {
   const [loading, setLoading] = useState("")
   const router = useRouter()
 

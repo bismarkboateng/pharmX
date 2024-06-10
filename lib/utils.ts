@@ -7,3 +7,9 @@ export const patientFormInitialValues = {
     password: "",
     confirmPassword: "",
 }
+
+export const patientSigninFormIntialValues = {
+    email: "",
+    password: "",
+    confirmPassword: "",
+}
