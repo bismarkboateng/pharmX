@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Providers } from "./providers";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import "@mantine/core/styles.css";
+import {  ColorSchemeScript, MantineProvider } from "@mantine/core"
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "pharmX",
@@ -17,10 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>
-         {children}
-        </Providers>
+      <head>
+        <ColorSchemeScript />
+      </head>
+      <body className={poppins.className}>
+       <MantineProvider>{children}</MantineProvider>
       </body>
     </html>
   );

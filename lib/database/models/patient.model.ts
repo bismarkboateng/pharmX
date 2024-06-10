@@ -1,8 +1,12 @@
-import { Schema, Types, model, models } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const PatientSchema = new Schema({
-    type: { type: Types.ObjectId, ref: "User", required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    address: { type: String, required: true },
+    contact: { type: String, required: true },
     location: { type: String, required: true },
+    authId: { type: String, required: true }
 })
 
 const Patient = models.Patient || model("Patient", PatientSchema);
