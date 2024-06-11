@@ -1,7 +1,10 @@
 import { Schema, Types, model, models } from "mongoose";
 
 const PharmacistSchema = new Schema({
-    type: { type: Types.ObjectId, ref: "User", required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    address: { type: String, required: true },
+    contact: { type: String, required: true },
     license_number: { type: String, required: true },
     work_hours: { type: String, required: true },
     pharmacy: { type: Types.ObjectId, ref: "Pharmacy", required: true },

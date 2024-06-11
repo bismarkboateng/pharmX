@@ -6,3 +6,15 @@ type createPatientParams = {
     location: string;
     authId: string;
 }
+
+type PharmacyParams = {
+    _id: string;
+    name: string;
+    description: string;
+    location: string;
+    image: string;
+    working_hours: string;
+    inventory: {
+        products: string []
+    }
+}
