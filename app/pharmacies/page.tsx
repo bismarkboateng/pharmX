@@ -6,7 +6,7 @@ import { list } from "@/lib/actions/pharmacy.actions";
 
 export default async function Pharmacies() {
 
-  const name = "ayeduase"
+  const name = "Kingdom Shop"
   const location = "Springfield"
 
   const pharmacies = await list(location)
