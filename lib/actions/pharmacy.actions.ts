@@ -4,6 +4,7 @@ import { connectToDatabase } from "../database"
 import Patient from "../database/models/patient.model"
 import Pharmacy from "../database/models/pharmacy.model"
 import Pharmacist from "../database/models/pharmacist.model"
+import Drug from "../database/models/drugs.model"
 
 const populatePharmacy = (query: any) => {
     return query
@@ -29,5 +30,19 @@ export const read = async (pharmacyId: string) => {
         return JSON.stringify(pharmacy)
     } catch (error) {
      throw error   
+    }
+}
+
+export const fetchPharmacyDrugs = async (pharmacyId: string) => {
+    try {
+        const pharmacy = await Pharmacy.findById(pharmacyId)
+
+        if (!pharmacy) {
+            return JSON.stringify({ error: "Pharmacy not found" })
+        }
+        const drugs = await Drug.find({ "_id": { $in: pharmacy.drugs } })
+        return JSON.stringify(drugs)
+    } catch (error) {
+        throw error
     }
 }

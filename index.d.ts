@@ -16,3 +16,16 @@ type PharmacyParams = {
     working_hours: string;
     drugs: string[]
 }
+
+type DrugType = {
+    _id: string;
+    category: string;
+    description: string;
+    expiry_date: string;
+    image: string;
+    name: string;
+    price: string;
+    require_prescription: boolean;
+    stock_quantity: number;
+    manufacturer_details: string;
+}

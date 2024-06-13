@@ -36,6 +36,16 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "i.guim.co.uk",
                 port: "",
+            },
+            {
+                protocol: "https",
+                hostname: "bernofarm.com",
+                port: "",
+            },
+            {
+                protocol: "https",
+                hostname: "www.pyxuspharmaceuticals.com",
+                port: "",
             }
         ]
     }
