@@ -21,7 +21,6 @@ export default function Signin() {
     validate: {
       email: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
       password: (value) => (value.length < 6 ? "Password must have at least 6 letters" : null),
-      confirmPassword: (value, values) => (value !== values.password ? "Passwords do not match" : null),
     },
   });
 
@@ -64,12 +63,6 @@ export default function Signin() {
           {...form.getInputProps("password")}
         />
 
-        <PasswordInput
-          mt="sm"
-          label="Confirm Password"
-          key={form.key("confirmPassword")}
-          {...form.getInputProps("confirmPassword")}
-        />
         <Group justify="flex-start" mt="md">
           <Button type="submit" loading={loading === "loading"} fullWidth>Sign in</Button>
         </Group>

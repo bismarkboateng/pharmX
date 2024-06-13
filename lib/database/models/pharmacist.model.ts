@@ -3,6 +3,8 @@ import { Schema, Types, model, models } from "mongoose";
 const PharmacistSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
+    image: { type: String, required: false },
+    bio: { type: String, required: true },
     address: { type: String, required: true },
     contact: { type: String, required: true },
     license_number: { type: String, required: true },

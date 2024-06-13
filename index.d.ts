@@ -14,7 +14,5 @@ type PharmacyParams = {
     location: string;
     image: string;
     working_hours: string;
-    inventory: {
-        products: string []
-    }
+    drugs: string[]
 }

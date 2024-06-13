@@ -1,10 +1,18 @@
 "use server"
 
+import Pharmacies from "@/app/pharmacies/page"
 import { connectToDatabase } from "../database"
 import Patient from "../database/models/patient.model"
 import { cookies } from "next/headers"
+
+
 export const setPatientId = (id: string) => {
     cookies().set("patientId", id)
+}
+
+export const getPatientId = async () => {
+    const patientId = await cookies().get("patientId")
+    return patientId
 }
 
 export const checkPatient = async (email: string) => {
@@ -29,3 +37,11 @@ export const createPatient = async (patient: createPatientParams) => {
         throw error
     }
 }
+
+// export const pharmaciesCloserToPaatient = async (patientId: string) => {
+//     try {
+//         const pharmaciesCloserToPatient = await Pharmacies.find({ location: currentPatient.location })
+//     } catch (error) {
+//         throw error
+//     }
+// }

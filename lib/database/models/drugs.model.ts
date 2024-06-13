@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const ProductSchema = new Schema({
+const DrugSchema = new Schema({
     name: { type: String, required: true },
     image: { type: String, required: true },
     description: { type: String, required: true },
@@ -12,5 +12,5 @@ const ProductSchema = new Schema({
     manufacturer_details: { type: String, required: true },
 })
 
-const Product = models.Product || model("Product", ProductSchema);
-export default Product
+const Drug = models.Drug || model("Drug", DrugSchema);
+export default Drug

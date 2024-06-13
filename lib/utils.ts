@@ -11,5 +11,4 @@ export const patientFormInitialValues = {
 export const patientSigninFormIntialValues = {
     email: "",
     password: "",
-    confirmPassword: "",
 }
