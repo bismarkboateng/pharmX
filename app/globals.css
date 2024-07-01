@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+@layer utilities {
+  .account-form_input {
+    @apply border border-dark-4 bg-dark-3 text-light-1 !important;
+  }
 }

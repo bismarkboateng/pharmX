@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
-import "@mantine/core/styles.css";
-import {  ColorSchemeScript, MantineProvider } from "@mantine/core"
 
-const poppins = Poppins({
+const roboto = Roboto({
   weight: ["400", "700"],
   subsets: ["latin"],
 });
@@ -21,11 +19,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <ColorSchemeScript />
-      </head>
-      <body className={poppins.className}>
-       <MantineProvider>{children}</MantineProvider>
+      <body className={`${roboto.className} bg-black text-white`}>
+       {children}
       </body>
     </html>
   );

@@ -1,14 +1,12 @@
-export const patientFormInitialValues = {
-    name: "",
-    email: "",
-    address: "",
-    contact: "",
-    location: "",
-    password: "",
-    confirmPassword: "",
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
 
-export const patientSigninFormIntialValues = {
-    email: "",
-    password: "",
+
+export const signUpFormInitialValues = {
+  name: "",
+  email: "",
 }
