@@ -12,16 +12,21 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 import { useState } from "react"
 import Link from "next/link"
-import { createUser } from "@/lib/actions/customer.actions"
+import { Loader2 } from "lucide-react"
+import { checkUserByEmail, getUserRole, setUserId } from "@/lib/actions/customer.actions"
+import { useRouter } from "next/navigation"
 
 
 export default function Signin() {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState("")
+  const [user, setUser] = useState("")
+  const [error, setError] = useState("")
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
-    defaultValues: signInFormSchema,
+    defaultValues: signUpFormInitialValues,
   })
    
   async function onSubmit(values: z.infer<typeof signInFormSchema>) {
@@ -30,14 +35,32 @@ export default function Signin() {
     password: password
    }
 
+   const role = await getUserRole()
+
+   const user: any = await checkUserByEmail(formData.email, role as string)
+
+   if (!JSON.parse(user!).isExist) {
+    setUser("this email does not exist")
+    return
+   }
+
+   if (role == "customer") {
+    await setUserId(JSON.parse(user).customer._id)
+   } else if (role === "pharmacist") {
+    await setUserId(JSON.parse(user).pharmacist._id)
+   }
+
    try {
     setLoading("loading")
-    const { data } = await signInWithEmailAndPassword(auth, formData.email, formData.password)
-    // await createUser(formData)
-
+    await signInWithEmailAndPassword(auth, formData.email, formData.password)
     setLoading("done")
+    if (role == "customer") {
+      router.push("/customer/onboarding")
+    } else if (role == "pharmacist") {
+      router.push("/pharmacist/onboarding")
+    }
    } catch (error) {
-    throw error
+    setError("this is not your fault, please try again")
    }
 
   }
@@ -61,7 +84,7 @@ export default function Signin() {
               <FormLabel className="text-light-2">Email</FormLabel>
               <FormControl>
                 <Input
-                 className="account-form_input placeholder:text-gray-500"
+                 className="account-form_input placeholder:text-gray-500 rounded"
                  placeholder="type your email" {...field}
                 />
               </FormControl>
@@ -78,22 +101,25 @@ export default function Signin() {
           value={password}
           onChange={event => setPassword(event.target.value)}
           className="block w-full account-form_input placeholder:text-gray-500
-          border border-gray-500 outline-none active:outline-none 
-          active:outline-none pl-3 py-2 active:border-none"
+          border border-gray-500 outline-none active:outline-none pl-3 py-2
+          active:border-none rounded"
           placeholder="****"
          />
         </div>
 
         <Button
          type="submit"
-         className="bg-blue-600 text-white w-full rounded-lg hover:bg-blue-600
+         className="bg-blue-600 text-white w-full rounded hover:bg-blue-600
          active:bg-blue-600 inactive:bg-blue-600 cursor-pointer"
+         disabled={loading === "loading"}
         >
+          {loading === "loading" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Submit
         </Button>
+        {user && <p className="text-red-500 text-center">{user}</p>}
       </form>
       <p className="mt-3">
-       New to pharmX? <Link href="/accounts/sign-up"
+       New here? <Link href="/accounts/sign-up"
        className="text-blue-600 underline">sign up</Link>
       </p>
      </Form>

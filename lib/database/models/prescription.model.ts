@@ -1,7 +1,7 @@
 import { Schema, model, models, Types } from "mongoose";
 
 const PrescriptionSchema = new Schema({
-    patientId: { type: Types.ObjectId, ref: "Patient", required: true },
+    customer: { type: Types.ObjectId, ref: "Customer" },
     file: { type: String, required: true },
     date_issued: { type: Date, required: true },
     drugs: [
