@@ -22,11 +22,11 @@ export const getUserRole = async () => {
 }
 
 export const setUserId = async (id: string) => {
-    await cookies().set("role", id)
+    await cookies().set("userId", id)
 }
 
 export const getUserId = async () => {
-    const cookie = await cookies().get("id")
+    const cookie = await cookies().get("userId")
     if (cookie) return cookie.value
 }
 export const createUser = async (formData: FormData, role: string) => {
@@ -70,5 +70,26 @@ export const checkUserByEmail = async (email: string, role: string) => {
 
     } catch (error) {
         return JSON.stringify({ error: "error encountered while fetching user"})
+    }
+}
+
+export const getUserInfo = async (role: string, userId: string) => {
+    try {
+        await connectToDatabase()
+        if (role === "pharmacist") {
+            const pharmacist = await Pharmacist.findById(userId)
+            if (!pharmacist) {
+                return JSON.stringify({ error: "pharmacist not found"})
+            }
+            return JSON.stringify({ msg: "OK", pharmacist: pharmacist })
+        } else if (role == "customer") {
+            const customer = await Customer.findById(userId)
+            if (!customer) {
+                return JSON.stringify({ error: "customer not found"})
+            }
+            return JSON.stringify({ msg: "OK", customer: customer })
+        }
+    } catch (error) {
+        return JSON.stringify({ error: "error fetching user" })
     }
 }

@@ -8,6 +8,8 @@ const PharmacistSchema = new Schema({
     address: { type: String, required: false },
     phone: { type: String, required: false },
     license_number: { type: String, required: false },
+    onboardered: { type: Boolean, required: false },
+    experience_level: { type: String, required: false },
     pharmacy: { type: Types.ObjectId, ref: "Pharmacy" },
 });
 

@@ -1,60 +1,47 @@
 "use client"
 
-import { pharmacistInitialValues } from "@/lib/utils"
-import { pharmacistSchema } from "@/lib/validators"
+import { pharmacyInitialValues } from "@/lib/utils"
+import { pharmacySchema } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import Image from "next/image"
 import { useState } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
-import { updatePharmacist } from "@/lib/actions/pharmacist.actions"
 import { useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
+import { Textarea } from "../ui/textarea"
+import { createPharmacy } from "@/lib/actions/pharmacy.actions"
 
-type PharmacistFormProps = {
-  pharmacist: {
-    _id: string;
-    name: string;
-    email: string;
-  }
-}
 
-export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
+export default function PharmacyForm() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState("")
   const router = useRouter()
   // add an image state
 
-  const form = useForm<z.infer<typeof pharmacistSchema>>({
-    resolver: zodResolver(pharmacistSchema),
-    defaultValues: {
-      ...pharmacistInitialValues,
-      email: pharmacist.email || "",
-      name: pharmacist.name || ""
-    },
+  const form = useForm<z.infer<typeof pharmacySchema>>({
+    resolver: zodResolver(pharmacySchema),
+    defaultValues: pharmacyInitialValues,
   })
 
-  async function onSubmit(values: z.infer<typeof pharmacistSchema>) {
+  async function onSubmit(values: z.infer<typeof pharmacySchema>) {
     const data = {
-      name: values.name,
-      email: values.email,
-      license_number: values.license,
-      phone: values.phone,
-      experience_level: values.experience_level,
-      address: values.address,
-      bio: values.bio,
-      onboardered: true,
+        name: values.pharmacy_name,
+        description: values.description,
+        location: values.pharmacy_location,
+        address: values.pharmacy_address,
+        email: values.pharmacy_email,
+        working_hours: values.working_hours,
     }
 
     try {
       setLoading("loading")
-      await updatePharmacist(data)
+      const pharmacy = await createPharmacy(data)
+      console.log(JSON.parse(pharmacy).pharmacy._id)
       setLoading("done")
-      router.push("/pharmacy/onboarding")
+    //   router.push(`/pharmacy/id`)
     } catch (error) {
       setError("error creating pharmacist")
     }
@@ -62,33 +49,16 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
 
   return (
     <section className="w-full">
-     <div className="flex items-center gap-2 mb-3">
-      <Image
-       src="/assets/defaultUser.png"
-       alt="default profile"
-       width={65}
-       height={65}
-       className="rounded-full"
-      />
-       <Input
-        id="picture"
-        type="file"
-        className="file:text-blue-500 border-none"
-        // value={}
-        // onChange={}
-       />
-     </div>
      <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
 
-        {/* full name and email */}
-        <div className="grid grid-cols-2 gap-2 mt-2">
+        <div className="grid grid-cols-2 gap-2 mt-4">
          <FormField
           control={form.control}
-          name="name"
+          name="pharmacy_name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Full name</FormLabel>
+              <FormLabel>Pharmacy Name</FormLabel>
               <FormControl className="">
                 <Input placeholder="name" {...field}
                 className="account-form_input rounded"/>
@@ -98,12 +68,12 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
          />
          <FormField
           control={form.control}
-          name="email"
+          name="pharmacy_location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Location</FormLabel>
               <FormControl className="">
-                <Input placeholder="@example.com" {...field}
+                <Input placeholder="" {...field}
                 className="account-form_input rounded"/>
               </FormControl>
             </FormItem>
@@ -111,16 +81,16 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
          />
         </div>
 
-        {/* license and years of experience */}
+     
         <div className="grid grid-cols-2 gap-2 mt-2">
          <FormField
           control={form.control}
-          name="license"
+          name="working_hours"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>License</FormLabel>
+              <FormLabel>Working hours</FormLabel>
               <FormControl>
-                <Input placeholder="****" {...field}
+                <Input placeholder="" {...field}
                 className="account-form_input rounded"/>
               </FormControl>
             </FormItem>
@@ -128,10 +98,10 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
          />
          <FormField
           control={form.control}
-          name="experience_level"
+          name="pharmacy_address"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Year&apos;s of experience</FormLabel>
+              <FormLabel>Address</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field}
                 className="account-form_input rounded"/>
@@ -143,36 +113,24 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
 
         <FormField
           control={form.control}
-          name="phone"
+          name="pharmacy_email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone number</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="+233 *** *** ****" {...field}
+                <Input placeholder="@example.com" {...field}
                 className="account-form_input rounded"/>
               </FormControl>
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
-          name="address"
+          name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Address</FormLabel>
-              <FormControl>
-                <Input placeholder="P.O..." {...field}
-                className="account-form_input rounded"/>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="bio"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Bio</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
                <Textarea
                 placeholder=""
@@ -183,6 +141,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
             </FormItem>
           )}
         />
+    
         <Button
          type="submit"
          className="bg-blue-600 text-white w-full rounded

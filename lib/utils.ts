@@ -17,4 +17,14 @@ export const pharmacistInitialValues = {
   experience_level: "",
   phone: "",
   address: "",
+  bio: "",
+}
+
+export const pharmacyInitialValues = {
+  pharmacy_name: "",
+  pharmacy_location: "",
+  working_hours: "",
+  pharmacy_address: "",
+  pharmacy_email: "",
+  description: "",
 }
