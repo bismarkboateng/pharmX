@@ -8,10 +8,10 @@ const PharmacySchema = new Schema({
     address: { type: String, required: false },
     email: { type: String, required: true, unique: true },
     drugs: [{
-        type: Types.ObjectId, ref: "Drug", required: true
+        type: Types.ObjectId, ref: "Drug",
     }],
     working_hours: { type: String, required: true },
-    pharmacist: { type: Types.ObjectId, ref: "Pharmacist", required: true },
+    pharmacist: { type: Types.ObjectId, ref: "Pharmacist" },
     orders: [{ type: Types.ObjectId, ref: "Order" }]
 })
 

@@ -39,9 +39,9 @@ export default function PharmacyForm() {
     try {
       setLoading("loading")
       const pharmacy = await createPharmacy(data)
-      console.log(JSON.parse(pharmacy).pharmacy._id)
+      const pharmacyId = JSON.parse(pharmacy).pharmacy._id
+      router.push(`/pharmacy/dashboard/${pharmacyId}`)
       setLoading("done")
-    //   router.push(`/pharmacy/id`)
     } catch (error) {
       setError("error creating pharmacist")
     }
