@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
 import { Textarea } from "../ui/textarea"
-import { createPharmacy } from "@/lib/actions/pharmacy.actions"
+import { createPharmacy, setPharmacyId } from "@/lib/actions/pharmacy.actions"
 
 
 export default function PharmacyForm() {
@@ -38,8 +38,9 @@ export default function PharmacyForm() {
 
     try {
       setLoading("loading")
-      const pharmacy = await createPharmacy(data)
+      const pharmacy:any = await createPharmacy(data)
       const pharmacyId = JSON.parse(pharmacy).pharmacy._id
+      await setPharmacyId(pharmacyId)
       router.push(`/pharmacy/dashboard/${pharmacyId}`)
       setLoading("done")
     } catch (error) {

@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import { Schema, Types, model, models } from "mongoose";
 
 const DrugSchema = new Schema({
     name: { type: String, required: true },
@@ -8,8 +8,8 @@ const DrugSchema = new Schema({
     price: { type: String, required: true },
     require_prescription: { type: Boolean, required: true },
     stock_quantity: { type: Number, required: true },
-    expiry_date: { type: Date, required: true },
-    manufacturer_details: { type: String, required: true },
+    expiry_date: { type: String, required: true },
+    pharmacy: { type: Types.ObjectId, ref: "Pharmacy"}
 })
 
 const Drug = models.Drug || model("Drug", DrugSchema);

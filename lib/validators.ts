@@ -27,3 +27,13 @@ export const pharmacySchema = z.object({
     pharmacy_email: z.string().email(),
     description: z.string().min(2).max(400),
 })
+
+export const addProductSchema = z.object({
+    name: z.string().min(2).max(250),
+    description: z.string().min(2).max(500),
+    category: z.string().min(2).max(100),
+    price: z.string().min(2).max(250),
+    stock_quantity: z.string().min(2).max(100),
+    require_prescription: z.boolean(),
+    expiry_date: z.string().min(2).max(250),
+})
