@@ -19,13 +19,10 @@ export default function Settings() {
 
   useEffect(() => {
     const getPharmacyInfo = async () => {
-      // pharmacy id from cookie
       const pharmacyId = await getPharmacyId()
       const pharmacy = await getPharmacy(pharmacyId!)
 
       const parsedPharmacy = JSON.parse(pharmacy!)
-      console.log(parsedPharmacy)
-      // console.log(JSON.parse(pharmacy))
       setPharmacyInfo(parsedPharmacy)
     }
     getPharmacyInfo()

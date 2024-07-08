@@ -50,6 +50,14 @@ export const settingsInitialValues = {
   email: "",
 }
 
+export const customerFormInitialValues = {
+  age: "",
+  location: "",
+  ID: "",
+  contact: "",
+  address: "",
+}
+
 export const uploadImageToFirebase = async (type: string, fileToUpload: any) => {
   let uploadedUrl = ""
   

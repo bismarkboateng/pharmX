@@ -30,6 +30,10 @@ export const getPharmacyId = async () => {
     if (cookie) return cookie.value
 }
 
+export const clearPharmacyId = async () => {
+    await cookies().delete("pharmacyId")
+}
+
 export const createPharmacy = async (data: createPharmacyParams) => {
     try {
         await connectToDatabase()

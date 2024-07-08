@@ -44,3 +44,12 @@ export const settingsFormSchema = z.object({
     address: z.string().min(2).max(250),
     email: z.string().min(2).max(250),
 })
+
+export const customerFormSchema = z.object({
+    age: z.string().min(2).max(50),
+    location: z.string().min(2).max(50),
+    ID: z.string().min(2).max(50),
+    contact: z.string().min(2).max(50),
+    address: z.string().min(2).max(50),
+})
+  

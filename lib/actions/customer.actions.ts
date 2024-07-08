@@ -12,6 +12,16 @@ type FormData = {
     password: string
 }
 
+type UpdateCustomerParams = {
+    address: string;
+    age: string;
+    contact: string;
+    location: string;
+    ID: string;
+}
+
+// user role in cookie
+
 export const setUserRole = async (role: string) => {
     await cookies().set("role", role)
 }
@@ -21,6 +31,11 @@ export const getUserRole = async () => {
     if (cookie) return cookie.value
 }
 
+export const clearUserRole = async () => {
+    await cookies().delete("role")
+}
+
+// user id's in cookie
 export const setUserId = async (id: string) => {
     await cookies().set("userId", id)
 }
@@ -29,24 +44,28 @@ export const getUserId = async () => {
     const cookie = await cookies().get("userId")
     if (cookie) return cookie.value
 }
+
+export const clearUserId = async () => {
+    await cookies().delete("userId")
+}
 export const createUser = async (formData: FormData, role: string) => {
     try {
         await connectToDatabase()
         if (role == "customer") {
             const customer = await Customer.create(formData)
             if (!customer) {
-                return JSON.stringify({ error: "could not create customer"})
+                return JSON.stringify({ msg: "could not create customer"})
             }
-            return JSON.stringify({ success: "customer created"})
+            return JSON.stringify({ msg: "customer created"})
         } else if (role == "pharmacist") {
             const pharmacist = await Pharmacist.create(formData)
             if (!pharmacist) {
-                return JSON.stringify({ error: "could not create pharmacist"})
+                return JSON.stringify({ msg: "could not create pharmacist"})
             }
-            return JSON.stringify({ success: "pharmacist created"})
+            return JSON.stringify({ msg: "pharmacist created"})
         }
     } catch (error) {
-       return JSON.stringify({ error: "error encountered while creating user"})
+       return JSON.stringify({ msg: "error encountered while creating user"})
     }
 }
 
@@ -69,7 +88,7 @@ export const checkUserByEmail = async (email: string, role: string) => {
         }
 
     } catch (error) {
-        return JSON.stringify({ error: "error encountered while fetching user"})
+        return JSON.stringify({ msg: "error encountered while fetching user"})
     }
 }
 
@@ -85,11 +104,32 @@ export const getUserInfo = async (role: string, userId: string) => {
         } else if (role == "customer") {
             const customer = await Customer.findById(userId)
             if (!customer) {
-                return JSON.stringify({ error: "customer not found"})
+                return JSON.stringify({ msg: "customer not found"})
             }
             return JSON.stringify({ msg: "OK", customer: customer })
         }
     } catch (error) {
-        return JSON.stringify({ error: "error fetching user" })
+        return JSON.stringify({ msg: "error fetching user" })
+    }
+}
+
+
+// user here is a normal customer
+export const updateCustomer = async (data: UpdateCustomerParams, id: string) => {
+    try {
+        await connectToDatabase()
+        const updatedCustomer = await Customer.findByIdAndUpdate(id, data, { new: true })
+        if (!updatedCustomer) {
+            return JSON.stringify({ msg: "could not update customer"})
+        }
+        return JSON.stringify({
+            msg: "customer updated",
+            updatedCustomer
+        })
+    } catch (error) {
+        return JSON.stringify({
+            msg: "error updating customer",
+            error,
+        })
     }
 }
