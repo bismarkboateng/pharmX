@@ -37,3 +37,10 @@ export const addProductSchema = z.object({
     require_prescription: z.boolean(),
     expiry_date: z.string().min(2).max(250),
 })
+
+export const settingsFormSchema = z.object({
+    name: z.string().min(2).max(250),
+    location: z.string().min(2).max(250),
+    address: z.string().min(2).max(250),
+    email: z.string().min(2).max(250),
+})

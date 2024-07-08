@@ -39,6 +39,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
   })
 
   async function onSubmit(values: z.infer<typeof pharmacistSchema>) {
+    console.log("function executed")
     const data = {
       name: values.name,
       email: values.email,
@@ -185,6 +186,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
         />
         <Button
          type="submit"
+        //  onClick={onSubmit}
          className="bg-blue-600 text-white w-full rounded
          cursor-pointer active:bg-blue-600 hover:bg-blue-600"
          disabled={loading === "loading"}
@@ -192,6 +194,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
           {loading === "loading" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Submit
         </Button>
+        {error && <p className="text-center text-red-500">{error}</p>}
       </form>
      </Form>
     </section>

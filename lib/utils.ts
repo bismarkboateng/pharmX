@@ -43,6 +43,13 @@ export const addProductInitialValues = {
   expiry_date: "",
 }
 
+export const settingsInitialValues = {
+  name: "",
+  location: "",
+  address: "",
+  email: "",
+}
+
 export const uploadImageToFirebase = async (type: string, fileToUpload: any) => {
   let uploadedUrl = ""
   

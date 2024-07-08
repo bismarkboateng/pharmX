@@ -51,7 +51,6 @@ export default function Signup() {
     setUserExist("this email is already registered")
     return
    }
-
    
    try {
     setLoading("loading")

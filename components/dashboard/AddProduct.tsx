@@ -21,10 +21,12 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { ChangeEvent, useState } from "react"
 import { getPharmacyId } from "@/lib/actions/pharmacy.actions"
 import { createDrug } from "@/lib/actions/drug.actions"
+import { usePathname } from "next/navigation"
 
 
 
 export default function AddProduct() {
+  const pathname = usePathname()
   const [drugImage, setDrugImage] = useState<FileList | null>(null)
 
   const form = useForm<z.infer<typeof addProductSchema>>({
@@ -49,7 +51,7 @@ export default function AddProduct() {
       image: uploadedDrugImageUrl,
       pharmacy: pharmacyId,
     }
-    await createDrug(drugData)
+    await createDrug(drugData, pathname)
 
     form.reset()
   }

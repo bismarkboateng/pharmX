@@ -29,3 +29,19 @@ type DrugType = {
     stock_quantity: number;
     manufacturer_details: string;
 }
+
+type Pharmacy = {
+    msg: string;
+    pharmacy: {
+        _id: string;
+        name: string;
+        email: string;
+        location: string;
+        address: string;
+        description: string;
+        drugs: [string]
+        orders: [string]
+        pharmacist: string; 
+        working_hours: string;
+    }
+}
