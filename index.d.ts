@@ -45,3 +45,20 @@ type Pharmacy = {
         working_hours: string;
     }
 }
+
+type Pharmacies = {
+    msg: string;
+    pharmacies:{
+        _id: string;
+        name: string;
+        description: string;
+        location: string;
+        address: string;
+        email: string;
+        drugs: [];
+        working_hours: string;
+        pharmacist: string;
+        orders: [];
+    }[],
+}
+  

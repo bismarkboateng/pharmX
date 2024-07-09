@@ -133,3 +133,21 @@ export const updateCustomer = async (data: UpdateCustomerParams, id: string) => 
         })
     }
 }
+
+export const getCustomerBasedOnId = async (id: string) => {
+    try {
+        await connectToDatabase()
+        const customer = await Customer.findById(id)
+        if (!customer) {
+            return JSON.stringify({
+                msg: "could not find customer"
+            })
+        }
+        return JSON.stringify({ msg: "customer found", customer })
+    } catch (error) {
+        return JSON.stringify({
+            msg: "error fetching customer",
+            error,
+        })
+    }
+}

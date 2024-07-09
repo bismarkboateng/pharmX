@@ -14,7 +14,7 @@ export default function User() {
      <DropdownMenu>
       <DropdownMenuTrigger>
        <div>
-        <FaUser fontSize={25} className="cursor-pointer" />
+        <FaUser fontSize={22} className="cursor-pointer" />
        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-white text-black rounded">

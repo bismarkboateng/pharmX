@@ -88,3 +88,19 @@ export const updatePharmacy = async (values: UpdatePharmacyParams, id: string) =
         })
     }
 }
+
+export const getPharmaciesBasedOnUserLocation = async (location: string) => {
+    try {
+        await connectToDatabase()
+        const pharmacies = await Pharmacy.find({ location })
+        if(!pharmacies) {
+            return JSON.stringify({ msg: "could not find pharmacies"})
+        }
+        return JSON.stringify({ msg: "fetched pharmacies", pharmacies, })
+    } catch (error) {
+        return JSON.stringify({
+            msg: "error fetching pharmacies",
+            error
+        })
+    }
+}
