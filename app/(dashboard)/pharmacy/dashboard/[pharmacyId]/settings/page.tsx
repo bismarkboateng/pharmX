@@ -7,14 +7,16 @@ import { Button } from "@/components/ui/button"
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { settingsFormSchema } from "@/lib/validators"
-import { settingsInitialValues } from "@/lib/utils"
+import { settingsInitialValues, uploadImageToFirebase } from "@/lib/utils"
 import { useState, useEffect } from "react"
 import { getPharmacy, getPharmacyId, updatePharmacy } from "@/lib/actions/pharmacy.actions"
+import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 
 export default function Settings() {
   const [pharmacyInfo, setPharmacyInfo] = useState<Pharmacy | null>(null)
   const [loading, setLoading] = useState("")
+  const [file, setFile] = useState<FileList | null>(null)
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -40,10 +42,22 @@ export default function Settings() {
   })
   
   async function onSubmit(values: z.infer<typeof settingsFormSchema>) {
+    console.log(file)
+    const fileToUpload = file && file[0]
+
+    if (!fileToUpload) {
+      setError("Add an image")
+    }
+
+
     try {
       setLoading("loading")
+      const uploadedFileUrl = await uploadImageToFirebase("pharmacy", fileToUpload)
       const pharmacyId = await getPharmacyId()
-      await updatePharmacy(values, pharmacyId!)
+      await updatePharmacy({
+        ...values,
+        image: uploadedFileUrl
+      }, pharmacyId!)
       setLoading("done")
     } catch (error) {
       setError("something went wrong, please try again")
@@ -57,6 +71,15 @@ export default function Settings() {
      <section className="mt-8">
       <Form {...form}>
        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+        <div className="grid w-full max-w-sm items-center gap-3">
+         <Label htmlFor="pharmacy_image">Pharmacy Image</Label>
+         <Input
+          id="pharmacy_image"
+          type="file"
+          className="account-form_input rounded file:text-blue-600"
+          onChange={event => setFile(event.target.files)}
+         />
+        </div>
         <div className="grid grid-cols-2 space-x-3">
           <FormField
            control={form.control}

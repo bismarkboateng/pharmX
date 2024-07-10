@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { customerFormSchema } from "@/lib/validators"
-import { customerFormInitialValues } from "@/lib/utils"
+import { customerFormInitialValues, uploadImageToFirebase } from "@/lib/utils"
 import { useState } from "react"
 import { getUserId, updateCustomer } from "@/lib/actions/customer.actions"
 import { useRouter } from "next/navigation"
@@ -18,6 +18,7 @@ import { toast } from "sonner"
 export default function CustomerOnboardingForm() {
   const [loading, setLoading] = useState("")
   const [error, setError] = useState("")
+  const [file, setFile] = useState<FileList | null>(null)
   const router = useRouter()
 
   const form = useForm<z.infer<typeof customerFormSchema>>({
@@ -26,10 +27,21 @@ export default function CustomerOnboardingForm() {
   })
 
   async function onSubmit(values: z.infer<typeof customerFormSchema>) {
+    const fileToUpload = file && file[0]
+
+    if (!fileToUpload) {
+      setError("upload an image")
+      return
+    }
+
     try {
       setLoading("loading")
+      const uploadedFileUrl = await uploadImageToFirebase("profile", fileToUpload)
       const customerId = await getUserId()
-      await updateCustomer(values, customerId!)
+      await updateCustomer({
+        ...values,
+        image: uploadedFileUrl
+      }, customerId!)
       setLoading("done")
       router.push("/pharmacies")
     } catch (error) {
@@ -51,8 +63,7 @@ export default function CustomerOnboardingForm() {
         id="picture"
         type="file"
         className="file:text-blue-500 border-none"
-        // value={}
-        // onChange={}
+        onChange={event => setFile(event.target.files)}
        />
      </div>
      

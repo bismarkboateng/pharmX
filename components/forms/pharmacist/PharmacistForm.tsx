@@ -186,7 +186,6 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
         />
         <Button
          type="submit"
-        //  onClick={onSubmit}
          className="bg-blue-600 text-white w-full rounded
          cursor-pointer active:bg-blue-600 hover:bg-blue-600"
          disabled={loading === "loading"}

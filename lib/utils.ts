@@ -69,7 +69,9 @@ export const uploadImageToFirebase = async (type: string, fileToUpload: any) => 
       fileRef = ref(storage, `drugs/${fileToUpload.name + v4()}`);
     } else if (type === "profile") {
       fileRef = ref(storage, `profile/${fileToUpload.name + v4()}`);
-    } 
+    } else if (type === "pharmacy") {
+      fileRef = ref(storage, `pharmacy/${fileToUpload.name + v4()}`)
+    }
 
     const snapshot = await uploadBytes(fileRef!, fileToUpload);
 

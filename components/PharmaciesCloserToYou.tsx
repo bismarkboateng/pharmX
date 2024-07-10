@@ -7,6 +7,7 @@ type PharmaciesCloserProps = {
         _id: string;
         name: string;
         description: string;
+        image: string;
         location: string;
         address: string;
         email: string;
@@ -20,13 +21,14 @@ type PharmaciesCloserProps = {
 export default function PharmaciesCloserToYou({ pharmacy }: PharmaciesCloserProps) {
 
   return (
-    <section className="grid grid-cols-3">
+    <section className="">
      <Card className="rounded border border-gray-400 hover:scale-90 transition-all duration-150">
       <Link href={`/pharmacies/${pharmacy._id}`} className="cursor-pointer">
        <CardHeader className="p-2">
        <CardTitle>
         <Image
-         src="/assets/pharmacy-demo.jpeg"
+        //  src="/assets/pharmacy-demo.jpeg"
+         src={pharmacy.image || "/assets/pharmacy-demo.jpeg"}
          alt="pharmacy demo"
          width={150}
          height={150}
@@ -38,7 +40,7 @@ export default function PharmaciesCloserToYou({ pharmacy }: PharmaciesCloserProp
        </CardTitle>
        </CardHeader>
        <CardContent className="p-2">
-        <p className="text-base text-gray-400">
+        <p className="text-base text-gray-400 line-clamp-3">
          {pharmacy.description}
         </p>
        </CardContent>

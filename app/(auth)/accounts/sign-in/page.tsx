@@ -35,8 +35,11 @@ export default function Signin() {
     password: password
    }
 
-   const role = await getUserRole()
+   const role = await getUserRole() || ""
 
+   // TODO: use the email, and check both models for where it exists, then set the
+   // role cookie and return the user if found
+   
    const user: any = await checkUserByEmail(formData.email, role as string)
 
    if (!JSON.parse(user!).isExist) {
@@ -117,6 +120,7 @@ export default function Signin() {
           Submit
         </Button>
         {user && <p className="text-red-500 text-center">{user}</p>}
+        {error && <p className="text-red-500 text-center">{error}</p>}
       </form>
       <p className="mt-3">
        New here? <Link href="/accounts/sign-up"

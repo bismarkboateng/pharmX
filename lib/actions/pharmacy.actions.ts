@@ -19,6 +19,7 @@ type UpdatePharmacyParams = {
     location: string;
     address: string;
     email: string;
+    image: string;
 }
 
 export const setPharmacyId = async (id: string) => {

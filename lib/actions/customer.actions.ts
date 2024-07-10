@@ -18,6 +18,7 @@ type UpdateCustomerParams = {
     contact: string;
     location: string;
     ID: string;
+    image: string;
 }
 
 // user role in cookie
@@ -72,6 +73,11 @@ export const createUser = async (formData: FormData, role: string) => {
 export const checkUserByEmail = async (email: string, role: string) => {
     try {
         await connectToDatabase()
+
+        if (role === "") {
+            // TODO: use the email and check both models where it exists
+            // then return that result
+        }
 
         if (role == "customer") {
             const customer = await Customer.findOne({ email: email })

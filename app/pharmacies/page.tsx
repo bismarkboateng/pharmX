@@ -16,12 +16,15 @@ export default async function Pharmacies() {
     <section>
      <section className="mt-10">
       <h1 className="text-2xl font-bold mb-4">Pharmacies closer to you</h1>
-      {parsedPharmacies.pharmacies.map((pharmacy) => (
-        <PharmaciesCloserToYou
-         key={pharmacy._id}
-         pharmacy={pharmacy}
-        />
-      ))}
+      <div className="grid grid-cols-3 gap-2">
+       {parsedPharmacies.pharmacies.map((pharmacy) => (
+         <PharmaciesCloserToYou
+          key={pharmacy._id}
+          pharmacy={pharmacy}
+         />
+       ))}
+      </div>
+        
      </section>
      <Separator />
      <section className="text-2xl font-bold mb-4 mt-10">

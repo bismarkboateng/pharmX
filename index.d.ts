@@ -53,6 +53,7 @@ type Pharmacies = {
         name: string;
         description: string;
         location: string;
+        image: string;
         address: string;
         email: string;
         drugs: [];
