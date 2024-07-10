@@ -105,3 +105,22 @@ export const getPharmaciesBasedOnUserLocation = async (location: string) => {
         })
     }
 }
+
+export const getOtherPharmacies = async (location: string) => {
+    try {
+        await connectToDatabase()
+
+        // handling null / undefined cases 
+        const query = location ? { location: { $ne: location }} : {}
+        const pharmacies = await Pharmacy.find(query)
+        if (!pharmacies) {
+            return JSON.stringify({ msg: "could not find any pharmacy"})
+        }
+        return JSON.stringify({ msg: "fetched pharmacies", pharmacies })
+    } catch (error) {
+        return JSON.stringify({
+            msg: "error fetching pharmacies",
+            error
+        })
+    }
+}

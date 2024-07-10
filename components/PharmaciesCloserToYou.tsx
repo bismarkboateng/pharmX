@@ -40,13 +40,13 @@ export default function PharmaciesCloserToYou({ pharmacy }: PharmaciesCloserProp
        </CardTitle>
        </CardHeader>
        <CardContent className="p-2">
-        <p className="text-base text-gray-400 line-clamp-3">
+        <p className="text-base text-gray-400 font-light line-clamp-3">
          {pharmacy.description}
         </p>
        </CardContent>
        <CardFooter className="p-2">
         <div className="flex items-center gap-1">
-         <p>Opening times:</p>
+         <p className="text-sm">Opening times:</p>
          <p className="text-sm text-gray-500">{pharmacy.working_hours}</p>
         </div>
        </CardFooter>
