@@ -15,11 +15,13 @@ import Link from "next/link"
 import { Loader2 } from "lucide-react"
 import { checkUserByEmail, getUserRole, setUserId } from "@/lib/actions/customer.actions"
 import { useRouter } from "next/navigation"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 
 export default function Signin() {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState("")
+  const [userRole, setUserRole] = useState("")
   const [user, setUser] = useState("")
   const [error, setError] = useState("")
   const router = useRouter()
@@ -35,7 +37,7 @@ export default function Signin() {
     password: password
    }
 
-   const role = await getUserRole() || ""
+   const role = await getUserRole() || userRole
 
    // TODO: use the email, and check both models for where it exists, then set the
    // role cookie and return the user if found
@@ -44,6 +46,11 @@ export default function Signin() {
 
    if (!JSON.parse(user!).isExist) {
     setUser("this email does not exist")
+    return
+   }
+
+   if (!role) {
+    setError("please select a role")
     return
    }
 
@@ -79,6 +86,16 @@ export default function Signin() {
       </section>
      <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+        <Select defaultValue={userRole} onValueChange={setUserRole}>
+         <span className="text-light-1">Which best describes you?</span>
+         <SelectTrigger className="w-full account-form_input">
+          <SelectValue placeholder="select a value" />
+         </SelectTrigger>
+         <SelectContent className="account-form_input">
+          <SelectItem value="customer" className="cursor-pointer">Customer</SelectItem>
+          <SelectItem value="pharmacist" className="cursor-pointer">Pharmacist</SelectItem>
+         </SelectContent>
+        </Select>
         <FormField
           control={form.control}
           name="email"

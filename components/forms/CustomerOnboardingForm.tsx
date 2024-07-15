@@ -12,7 +12,8 @@ import { customerFormInitialValues, uploadImageToFirebase } from "@/lib/utils"
 import { useState } from "react"
 import { getUserId, updateCustomer } from "@/lib/actions/customer.actions"
 import { useRouter } from "next/navigation"
-import { toast } from "sonner"
+import { toast } from "react-hot-toast"
+import { Loader2 } from "lucide-react"
 
 
 export default function CustomerOnboardingForm() {
@@ -30,7 +31,7 @@ export default function CustomerOnboardingForm() {
     const fileToUpload = file && file[0]
 
     if (!fileToUpload) {
-      setError("upload an image")
+      toast.error("please upload an image")
       return
     }
 
@@ -40,12 +41,14 @@ export default function CustomerOnboardingForm() {
       const customerId = await getUserId()
       await updateCustomer({
         ...values,
-        image: uploadedFileUrl
+        image: uploadedFileUrl,
+        onboarded: true,
       }, customerId!)
       setLoading("done")
+      toast.success("info updated")
       router.push("/pharmacies")
     } catch (error) {
-      setError("something went wrong, please try again")
+      toast.error("something went wrong, please try again")
     }
   }
 
@@ -148,17 +151,14 @@ export default function CustomerOnboardingForm() {
         <Button
          type="submit"
          className="bg-blue-600 text-white w-full rounded hover:bg-blue-600 active:bg-blue-600"
+         disabled={loading === "loading"}
         >
+          {loading === "loading" && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
           Submit
         </Button>
         {error && <p className="text-red-500 text-center">{error}</p>}
       </form>
      </Form>
-     {loading === "done" && (
-        <section className="text-black rounded">
-          {toast("Your info has been updated!")}
-        </section>
-      )}
     </div>
     </section>
   )

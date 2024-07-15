@@ -1,8 +1,14 @@
 import CustomerOnboardingForm from "@/components/forms/CustomerOnboardingForm"
-import {  getUserRole } from "@/lib/actions/customer.actions"
+import {  getUserId, getUserInfo, getUserRole } from "@/lib/actions/customer.actions"
 
 
 export default async function CustomerOnboarding() {
+  const customerId = await getUserId()
+  const role = "customer"
+  const customer = await getUserInfo(role, customerId!)
+  const parsedCustomer = JSON.parse(customer!)
+
+
   return (
     <section>
      <section className="w-[40%] mx-auto mt-8">

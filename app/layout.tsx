@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "react-hot-toast"
 import "./globals.css";
 
 const roboto = Roboto({
@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.className} bg-black text-white`}>
        <main>{children}</main>
-       <Toaster className="font-bold text-black" />
+       <Toaster />
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import { storage } from "./firebase"
 import { twMerge } from "tailwind-merge"
 import { v4 } from "uuid"
 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -71,6 +72,8 @@ export const uploadImageToFirebase = async (type: string, fileToUpload: any) => 
       fileRef = ref(storage, `profile/${fileToUpload.name + v4()}`);
     } else if (type === "pharmacy") {
       fileRef = ref(storage, `pharmacy/${fileToUpload.name + v4()}`)
+    } else if (type === "prescription") {
+      fileRef = ref(storage, `prescription/${fileToUpload.name + v4()}`)
     }
 
     const snapshot = await uploadBytes(fileRef!, fileToUpload);

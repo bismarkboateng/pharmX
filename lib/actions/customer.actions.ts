@@ -19,6 +19,7 @@ type UpdateCustomerParams = {
     location: string;
     ID: string;
     image: string;
+    onboarded: boolean;
 }
 
 // user role in cookie

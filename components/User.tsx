@@ -5,9 +5,19 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { IoMdLogOut } from "react-icons/io";
+import { clearUserId, clearUserRole } from "@/lib/actions/customer.actions";
+import { clearPharmacyId } from "@/lib/actions/pharmacy.actions";
+import { useRouter } from "next/navigation";
 
 export default function User() {
-  const handleLogout = () => {}
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await clearUserRole()
+    await clearUserId()
+    await clearPharmacyId()
+    router.push("/accounts/sign-in")
+  }
 
   return (
     <section>

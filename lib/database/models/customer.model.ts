@@ -9,6 +9,7 @@ const CustomerSchema = new Schema({
     contact: { type: String, required: false },
     location: { type: String, required: false },
     authId: { type: String, required: false },
+    onboarded: { type: Boolean, required: false },
     prescription: [{ type: Types.ObjectId, ref: "Prescription" }],
     ID: { type: String, required: false },
 })
