@@ -8,12 +8,20 @@ import toast from "react-hot-toast";
 import { uploadImageToFirebase } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import axios from "axios"
+import { searchDrugsWithText } from "@/lib/actions/drug.actions";
+import { getUserId } from "@/lib/actions/customer.actions";
+import { FaDatabase } from "react-icons/fa6";
+import Drugs from "./Drugs";
 
 
-export default function FileUploader() {
+type Props = {
+  pharmacyId: string;
+}
+export default function FileUploader({ pharmacyId }: Props) {
   const [loading, setLoading] = useState("")
   const [prescriptionText, setPrescriptionText] = useState("")
   const [prescriptionFile, setPrescriptionFile] = useState<FileList | null>(null)
+  const [drugsFromDb, setDrugsFromDb] = useState<DrugsFromDBType | null>(null)
 
   const submitFile = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -37,15 +45,22 @@ export default function FileUploader() {
 
     try {
         setLoading("loading")
-        const file = await uploadImageToFirebase("prescription", fileToUpload)
+        // const file = await uploadImageToFirebase("prescription", fileToUpload)
         console.log("before extracting")
 
         // EXTRACT TEXT FROM PDF
         const formData = new FormData()
         formData.append("pdfFile", fileToUpload)
         const { data } = await axios.post("http://localhost:4000/extract-text", formData)
-        console.log(data)
 
+        // INTEGRATE GPT-3 TO GET LIST OF MEDICINES
+        // const medicines = await axios.post("/end-point", data)
+
+        // SEARCH through the pharmacy db for the drug info
+        const arrayOfDrugs = data.trim().split("\n")
+        const drugs = JSON.parse(await searchDrugsWithText(arrayOfDrugs) as string) as DrugsFromDBType
+
+        setDrugsFromDb(drugs)
         setLoading("done")
         toast.success("file uploaded successfully!")
     } catch (error) {
@@ -64,20 +79,27 @@ export default function FileUploader() {
         <Input
          id="prescription_file"
          type="file"
-         className="account-form_input rounded file:text-blue-600"
+         className="border border-[#ccc] rounded file:text-blue-600"
          onChange={(event) => setPrescriptionFile(event.target.files)}
          accept="application/pdf"
         />
        </div>
        <Button
         type="submit"
-        className="bg-blue-600 hover:bg-blue-600 active:bg-blue-600 rounded mt-5 ml-7"
+        className="bg-blue-600 hover:bg-blue-600 active:bg-blue-600 rounded mt-5 ml-7
+        text-white"
         disabled={loading === "loading"}
        >
         { loading === "loading" && <Loader2 className="mr-2 w-4 h-4 animate-spin" />}
         Submit
        </Button>
       </form>
+
+      <section>
+       {drugsFromDb && (
+        <Drugs drugsInfo={drugsFromDb} />
+       )}
+      </section>
     </section>
   )
 }

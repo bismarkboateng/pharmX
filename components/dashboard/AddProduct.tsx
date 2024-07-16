@@ -65,7 +65,7 @@ export default function AddProduct() {
         active:bg-blue-600 hover:bg-blue-600 rounded cursor-pointer">Add Product</Button>
        </div>
       </AlertDialogTrigger>
-      <AlertDialogContent className="bg-black rounded border border-gray-700">
+      <AlertDialogContent className="bg-white rounded border border-gray-700">
        <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
         <AlertDialogHeader>
@@ -79,7 +79,7 @@ export default function AddProduct() {
              <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input className="account-form_input rounded" {...field} />
+                <Input className="border border-[#ccc] rounded" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
              </FormItem>
@@ -92,7 +92,7 @@ export default function AddProduct() {
              <Input
               id="product image"
               type="file"
-              className="account-form_input rounded text-white file:text-blue-600
+              className="border border-[#ccc] rounded file:text-blue-600
               w-full mt-2"
               onChange={handleImageChange}
              />
@@ -107,7 +107,7 @@ export default function AddProduct() {
                 <FormItem>
                   <FormLabel>Category</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g. antibiotics" className="account-form_input rounded" {...field} />
+                    <Input placeholder="e.g. antibiotics" className="border border-[#ccc] rounded" {...field} />
                   </FormControl>
                   <FormMessage className="text-red-500" />
                 </FormItem>
@@ -120,7 +120,7 @@ export default function AddProduct() {
                 <FormItem>
                   <FormLabel>Price</FormLabel>
                   <FormControl>
-                    <Input className="account-form_input rounded" {...field} />
+                    <Input className="border border-[#ccc] rounded" {...field} />
                   </FormControl>
                   <FormMessage className="text-red-500" />
                 </FormItem>
@@ -136,7 +136,7 @@ export default function AddProduct() {
                 <FormItem>
                   <FormLabel>Stock</FormLabel>
                   <FormControl>
-                    <Input className="account-form_input rounded" {...field} />
+                    <Input className="border border-[#ccc] rounded" {...field} />
                   </FormControl>
                   <FormMessage className="text-red-500" />
                 </FormItem>
@@ -149,7 +149,7 @@ export default function AddProduct() {
                 <FormItem>
                   <FormLabel>Expiry</FormLabel>
                   <FormControl>
-                    <Input className="account-form_input rounded" {...field} />
+                    <Input className="border border-[#ccc] rounded" {...field} />
                   </FormControl>
                   <FormMessage className="text-red-500" />
                 </FormItem>
@@ -165,7 +165,7 @@ export default function AddProduct() {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Input className="account-form_input rounded" {...field} />
+                    <Input className="border border-[#ccc] rounded" {...field} />
                   </FormControl>
                   <FormMessage className="text-red-500" />
                 </FormItem>
@@ -183,7 +183,7 @@ export default function AddProduct() {
                    <div className="flex items-center space-x-2 mt-4">
                     <Checkbox
                      id="prescription"
-                     className="account-form_input accent-blue-600
+                     className="border border-[#ccc] accent-blue-600
                     focus:accent-blue-600"
                      checked={field.value}
                      onCheckedChange={field.onChange}

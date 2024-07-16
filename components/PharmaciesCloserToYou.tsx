@@ -21,13 +21,12 @@ type PharmaciesCloserProps = {
 export default function PharmaciesCloserToYou({ pharmacy }: PharmaciesCloserProps) {
 
   return (
-    <section className="">
-     <Card className="rounded border border-gray-400 hover:scale-90 transition-all duration-150">
+    <section className="bg-white shadow rounded">
+     <Card className="border-none rounded hover:scale-90 transition-all duration-150">
       <Link href={`/pharmacies/${pharmacy._id}`} className="cursor-pointer">
        <CardHeader className="p-2">
        <CardTitle>
         <Image
-        //  src="/assets/pharmacy-demo.jpeg"
          src={pharmacy.image || "/assets/pharmacy-demo.jpeg"}
          alt="pharmacy demo"
          width={150}

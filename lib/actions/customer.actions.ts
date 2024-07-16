@@ -43,6 +43,7 @@ export const setUserId = async (id: string) => {
 }
 
 export const getUserId = async () => {
+    console.log(`getting user id from getuser id`)
     const cookie = await cookies().get("userId")
     if (cookie) return cookie.value
 }
@@ -74,11 +75,6 @@ export const createUser = async (formData: FormData, role: string) => {
 export const checkUserByEmail = async (email: string, role: string) => {
     try {
         await connectToDatabase()
-
-        if (role === "") {
-            // TODO: use the email and check both models where it exists
-            // then return that result
-        }
 
         if (role == "customer") {
             const customer = await Customer.findOne({ email: email })

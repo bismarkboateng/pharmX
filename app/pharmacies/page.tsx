@@ -19,9 +19,9 @@ export default async function Pharmacies() {
     <section>
      <section className="mt-10">
       <h1 className="text-2xl font-bold mb-4">Pharmacies closer to you</h1>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-4 gap-2">
        {parsedPharmacies.pharmacies.length === 0 &&
-        <p className="text-gray-500">
+        <p className="text-gray-500 text-sm font-light">
          we could not find any pharmacy closer to you
         </p>}
        {parsedPharmacies.pharmacies.map((pharmacy) => (
@@ -36,9 +36,9 @@ export default async function Pharmacies() {
      <Separator />
      <section className="text-2xl font-bold mb-5 mt-10">
       <h1 className="mb-4">Other pharmacies</h1>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-4 gap-2">
       {parsedOthers.pharmacies.length === 0 && 
-      <p className="text-gray-500">
+      <p className="text-gray-500 text-sm font-light">
        could not find pharmacies around you
       </p>}
       {parsedOthers.pharmacies.map(pharmacy => (

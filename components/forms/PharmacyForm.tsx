@@ -62,7 +62,7 @@ export default function PharmacyForm() {
               <FormLabel>Pharmacy Name</FormLabel>
               <FormControl className="">
                 <Input placeholder="name" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -75,7 +75,7 @@ export default function PharmacyForm() {
               <FormLabel>Location</FormLabel>
               <FormControl className="">
                 <Input placeholder="" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -92,7 +92,7 @@ export default function PharmacyForm() {
               <FormLabel>Working hours</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -105,7 +105,7 @@ export default function PharmacyForm() {
               <FormLabel>Address</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -120,7 +120,7 @@ export default function PharmacyForm() {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder="@example.com" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -136,7 +136,7 @@ export default function PharmacyForm() {
                <Textarea
                 placeholder=""
                 { ...field }
-                className="account-form_input rounded"
+                className="border border-[#ccc] rounded"
                />
               </FormControl>
             </FormItem>

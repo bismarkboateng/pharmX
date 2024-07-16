@@ -3,16 +3,25 @@ import {
   Table, TableBody, TableCaption,
   TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table"
-import { getDrugs } from "@/lib/actions/drug.actions"
 import { MdDelete } from "react-icons/md";
 import { TiEdit } from "react-icons/ti";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { getDrugsBasedOnPharmacyId } from "@/lib/actions/drug.actions";
+import { getPharmacyId } from "@/lib/actions/pharmacy.actions";
+import { getUserId } from "@/lib/actions/customer.actions";
 
 
-export default async function AllDrugs() {
+type Props = {
+  params: {
+    pharmacyId: string;
+  }
+}
+export default async function AllDrugs({ params }: Props) {
+  const userId = await getUserId()
 
-  const drugs = await getDrugs()
+  const drugs = await getDrugsBasedOnPharmacyId(userId!)
   const parsedDrugs = JSON.parse(drugs!)
+  
 
 
   return (
@@ -33,7 +42,7 @@ export default async function AllDrugs() {
        </TableRow>
       </TableHeader>
       <TableBody>
-       {parsedDrugs.drugs.map((drug: DrugType) => (
+       {parsedDrugs.drugs?.map((drug: DrugType) => (
        <TableRow key={drug._id}>
         <TableCell>{drug.name}</TableCell>
         <TableCell>{drug.category}</TableCell>

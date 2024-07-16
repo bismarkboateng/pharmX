@@ -9,11 +9,12 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { customerFormSchema } from "@/lib/validators"
 import { customerFormInitialValues, uploadImageToFirebase } from "@/lib/utils"
-import { useState } from "react"
-import { getUserId, updateCustomer } from "@/lib/actions/customer.actions"
+import { useEffect, useState } from "react"
+import { getUserId, getUserInfo, updateCustomer } from "@/lib/actions/customer.actions"
 import { useRouter } from "next/navigation"
 import { toast } from "react-hot-toast"
 import { Loader2 } from "lucide-react"
+
 
 
 export default function CustomerOnboardingForm() {
@@ -26,6 +27,20 @@ export default function CustomerOnboardingForm() {
     resolver: zodResolver(customerFormSchema),
     defaultValues: customerFormInitialValues,
   })
+
+  useEffect(() => {
+   const getUser = async () => {
+    const userId = (await getUserId()) as string
+    const user = JSON.parse(await getUserInfo("customer", userId) as string) as Customer
+   
+    if (user.customer.onboarded) {
+      router.push("/pharmacies")
+    }
+  }
+
+   getUser()
+
+  }, [])
 
   async function onSubmit(values: z.infer<typeof customerFormSchema>) {
     const fileToUpload = file && file[0]
@@ -82,7 +97,7 @@ export default function CustomerOnboardingForm() {
             <FormItem>
               <FormLabel>Age</FormLabel>
               <FormControl>
-                <Input type="number" className="account-form_input rounded" placeholder="" {...field} />
+                <Input type="number" className="border border-[#ccc] rounded" placeholder="" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -95,7 +110,7 @@ export default function CustomerOnboardingForm() {
             <FormItem>
               <FormLabel>Location</FormLabel>
               <FormControl>
-                <Input className="account-form_input rounded" placeholder="" {...field} />
+                <Input className="border border-[#ccc] rounded" placeholder="" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -112,7 +127,7 @@ export default function CustomerOnboardingForm() {
             <FormItem>
               <FormLabel>National ID number</FormLabel>
               <FormControl>
-                <Input className="account-form_input rounded" placeholder="" {...field} />
+                <Input className="border border-[#ccc] rounded" placeholder="" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -125,7 +140,7 @@ export default function CustomerOnboardingForm() {
             <FormItem>
               <FormLabel>Contact</FormLabel>
               <FormControl>
-                <Input className="account-form_input rounded" placeholder="" {...field} />
+                <Input className="border border-[#ccc] rounded" placeholder="" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -141,7 +156,7 @@ export default function CustomerOnboardingForm() {
             <FormItem>
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Input className="account-form_input rounded" placeholder="" {...field} />
+                <Input className="border border-[#ccc] rounded" placeholder="" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>

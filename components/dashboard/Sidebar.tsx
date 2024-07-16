@@ -8,8 +8,9 @@ export default async function Sidebar() {
 
 
   return (
-    <section className="h-screen w-[15%] border-r border-light-4 pl-2 pr-2">
-     <div className="text-xl font-bold mt-5">{parsedPharmacy.pharmacy.name}</div>
+    <section className="h-screen w-[15%] border-r border-light-4 bg-white
+     pl-2 pr-2 shadow">
+     <div className="text-xl font-bold mt-5">{parsedPharmacy.pharmacy?.name}</div>
      <SidebarLinks pharmacyId={pharmacyId!} />
     </section>
   )

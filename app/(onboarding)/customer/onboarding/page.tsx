@@ -11,8 +11,8 @@ export default async function CustomerOnboarding() {
 
   return (
     <section>
-     <section className="w-[40%] mx-auto mt-8">
-      <h1 className="text-2xl text-white font-extrabold">Onboarding</h1>
+     <section className="bg-white p-3 pb-3 w-[40%] mx-auto mt-10 rounded shadow">
+      <h1 className="text-2xl font-extrabold">Onboarding</h1>
       <p>Complete your profile to access pharmX</p>
 
       <section>

@@ -40,7 +40,7 @@ export default async function PharmacyDetail({ params }: Props) {
 
         <section className="p-3">
           <h1 className="text-center font-bold text-xl">Access drugs at {parsedPharmacy.pharmacy?.name}</h1>
-          <FileUploader />
+          <FileUploader pharmacyId={params.pharmacyId}/>
         </section>
       </section>
 

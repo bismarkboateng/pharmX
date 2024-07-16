@@ -41,14 +41,14 @@ type Pharmacy = {
         description: string;
         drugs: [string]
         orders: [string]
-        pharmacist: string; 
+        pharmacist: string;
         working_hours: string;
     }
 }
 
 type Pharmacies = {
     msg: string;
-    pharmacies:{
+    pharmacies: {
         _id: string;
         name: string;
         description: string;
@@ -62,4 +62,56 @@ type Pharmacies = {
         orders: [];
     }[],
 }
-  
+
+type Customer = {
+    msg: string;
+    customer: {
+        ID: string;
+        address: string;
+        age: string;
+        contact: string;
+        email: string;
+        image: string;
+        location: string;
+        name: string;
+        onboarded: boolean;
+        prescription: any[];
+        __v: number;
+        _id: string;
+    };
+};
+
+
+type DrugsFromDBType = {
+    msg: string;
+    drugs: {
+        category: string;
+        description: string;
+        expiry_date: string;
+        image: string;
+        name: string;
+        pharmacy: string;
+        price: string;
+        require_prescription: boolean;
+        stock_quantity: number;
+        __v: number;
+        _id: string;
+    }[]
+}
+
+type DrugDetailFromDBType = {
+    msg: string;
+    drug: {
+        category: string;
+        description: string;
+        expiry_date: string;
+        image: string;
+        name: string;
+        pharmacy: string;
+        price: string;
+        require_prescription: boolean;
+        stock_quantity: number;
+        __v: number;
+        _id: string;
+    }
+}

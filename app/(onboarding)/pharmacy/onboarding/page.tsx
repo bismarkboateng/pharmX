@@ -4,8 +4,8 @@ export default async function PharmacyOnboarding() {
 
   return (
     <section>
-     <section className="w-[40%] mx-auto mt-8">
-      <h1 className="text-2xl text-white font-extrabold">Onboarding</h1>
+     <section className="bg-white p-3 shadow rounded w-[40%] mx-auto mt-8">
+      <h1 className="text-2xl font-extrabold">Onboarding</h1>
       <p>Fill in your pharmacy Info</p>
 
       <section>

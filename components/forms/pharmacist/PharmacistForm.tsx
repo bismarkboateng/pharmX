@@ -40,6 +40,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
 
   async function onSubmit(values: z.infer<typeof pharmacistSchema>) {
     console.log("function executed")
+
     const data = {
       name: values.name,
       email: values.email,
@@ -70,6 +71,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
        width={65}
        height={65}
        className="rounded-full"
+       priority
       />
        <Input
         id="picture"
@@ -92,7 +94,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
               <FormLabel>Full name</FormLabel>
               <FormControl className="">
                 <Input placeholder="name" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -105,7 +107,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
               <FormLabel>Email</FormLabel>
               <FormControl className="">
                 <Input placeholder="@example.com" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -122,7 +124,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
               <FormLabel>License</FormLabel>
               <FormControl>
                 <Input placeholder="****" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -135,7 +137,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
               <FormLabel>Year&apos;s of experience</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -150,7 +152,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
               <FormLabel>Phone number</FormLabel>
               <FormControl>
                 <Input placeholder="+233 *** *** ****" {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -163,7 +165,7 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
               <FormLabel>Address</FormLabel>
               <FormControl>
                 <Input placeholder="P.O..." {...field}
-                className="account-form_input rounded"/>
+                className="border border-[#ccc] rounded"/>
               </FormControl>
             </FormItem>
           )}
@@ -178,21 +180,25 @@ export default function PharmacistForm({ pharmacist }: PharmacistFormProps) {
                <Textarea
                 placeholder=""
                 { ...field }
-                className="account-form_input rounded"
+                className="border border-[#ccc] rounded"
                />
               </FormControl>
             </FormItem>
           )}
         />
-        <Button
+        <button
          type="submit"
-         className="bg-blue-600 text-white w-full rounded
+         className="bg-blue-600 text-white w-full rounded py-2
          cursor-pointer active:bg-blue-600 hover:bg-blue-600"
          disabled={loading === "loading"}
         >
-          {loading === "loading" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Submit
-        </Button>
+          <div className="flex items-center justify-center gap-2">
+            <p>
+             {loading === "loading" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            </p>
+            <p>Submit</p>
+          </div>
+        </button>
         {error && <p className="text-center text-red-500">{error}</p>}
       </form>
      </Form>

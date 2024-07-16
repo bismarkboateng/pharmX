@@ -124,3 +124,4 @@ export const getOtherPharmacies = async (location: string) => {
         })
     }
 }
+

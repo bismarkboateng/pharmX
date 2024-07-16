@@ -1,14 +1,13 @@
 import Image from "next/image";
 import { Input } from "./ui/input";
-import { FaUser } from "react-icons/fa6";
 import User from "./User";
+import Link from "next/link";
 
 
 export default function Navbar() {
   return (
     <nav className="flex items-center justify-between">
-
-     <div className="flex items-center gap-2">
+     <Link href="/" className="flex items-center gap-2">
       <Image
        src="/assets/favicon.ico"
        alt="logo"
@@ -16,12 +15,12 @@ export default function Navbar() {
        height={40}
        className="rounded-full"
       />
-      <p className="text-white font-bold">pharmX</p>
-     </div>
+      <p className="text-gray-700 font-bold">pharmX</p>
+     </Link>
 
      <div>
       <Input
-       className="account-form_input rounded w-[150%]"
+       className="border border-[#ccc] rounded w-[150%]"
        placeholder="type a pharmacy name / location"
       />
      </div>

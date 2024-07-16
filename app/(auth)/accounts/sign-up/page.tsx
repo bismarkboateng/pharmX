@@ -66,8 +66,8 @@ export default function Signup() {
   }
 
   return (
-    <section className="xl:w-[30%] mx-auto">
-      <section className="mt-10 mb-10">
+    <section className="mt-10 rounded  bg-white shadow p-4 xl:w-[30%] mx-auto">
+      <section className="mb-10">
        <h1 className="text-2xl font-bold">Sign up</h1>
        <p className="mt-1">
         By continuing, you agree to our <span className="text-blue-600">User Agreement</span>
@@ -77,11 +77,11 @@ export default function Signup() {
      <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
         <Select defaultValue={role} onValueChange={setRole}>
-         <span className="text-light-1">Which best describes you?</span>
-         <SelectTrigger className="w-full account-form_input">
+         <span className="">Which best describes you?</span>
+         <SelectTrigger className="w-full border border-[#ccc] rounded">
           <SelectValue placeholder="select a value" />
          </SelectTrigger>
-         <SelectContent className="account-form_input">
+         <SelectContent className="bg-white">
           <SelectItem value="customer" className="cursor-pointer">Customer</SelectItem>
           <SelectItem value="pharmacist" className="cursor-pointer">Pharmacist</SelectItem>
          </SelectContent>
@@ -91,9 +91,9 @@ export default function Signup() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-light-2">Full Name</FormLabel>
+              <FormLabel className="">Full Name</FormLabel>
               <FormControl>
-                <Input className="account-form_input placeholder:text-gray-500 rounded"
+                <Input className="border border-[#ccc] placeholder:text-gray-500 rounded"
                 placeholder="type your full name" {...field} />
               </FormControl>
               <FormMessage className="text-red-400" />
@@ -105,10 +105,10 @@ export default function Signup() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-light-2">Email</FormLabel>
+              <FormLabel className="">Email</FormLabel>
               <FormControl>
                 <Input
-                 className="account-form_input placeholder:text-gray-500 rounded"
+                 className="border border-[#ccc] placeholder:text-gray-500 rounded"
                  placeholder="type your email" {...field}
                 />
               </FormControl>
@@ -118,14 +118,14 @@ export default function Signup() {
         />
 
         <div>
-         <label className="text-light-2 mb-2 block">Password</label>
+         <label className="mb-2 block">Password</label>
          <input
           type="password"
           name="password"
           value={password}
           onChange={event => setPassword(event.target.value)}
-          className="block w-full account-form_input placeholder:text-gray-500
-          border border-gray-500 outline-none active:outline-none
+          className="block w-full border border-[#ccc] placeholder:text-gray-500
+          outline-none active:outline-none
           pl-3 py-2 active:border-none rounded"
           placeholder="****"
          />

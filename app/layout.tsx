@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} bg-black text-white`}>
+      <body className={`${roboto.className} bg-black/10`}>
        <main>{children}</main>
        <Toaster />
       </body>
