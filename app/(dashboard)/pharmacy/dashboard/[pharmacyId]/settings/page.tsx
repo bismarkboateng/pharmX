@@ -11,7 +11,7 @@ import { settingsInitialValues, uploadImageToFirebase } from "@/lib/utils"
 import { useState, useEffect } from "react"
 import { getPharmacy, getPharmacyId, updatePharmacy } from "@/lib/actions/pharmacy.actions"
 import { Label } from "@/components/ui/label"
-import { toast } from "sonner"
+import { toast } from "react-hot-toast"
 
 export default function Settings() {
   const [pharmacyInfo, setPharmacyInfo] = useState<Pharmacy | null>(null)
