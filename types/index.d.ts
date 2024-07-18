@@ -115,3 +115,28 @@ type DrugDetailFromDBType = {
         _id: string;
     }
 }
+
+
+type CustomerResponse = {
+    msg: string;
+    customer: {
+        age: string;
+        id_number: string;
+        location: string;
+        prescription: string[]; 
+        user: string;
+        _id: string;
+    }
+}
+
+type SignInUserFromDB = {
+    isExist: boolean;
+    user: {
+        address: string;
+        contact: string;
+        email: string;
+        name: string;
+        role: string;
+        _id: string;
+    }
+}

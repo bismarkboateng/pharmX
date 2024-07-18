@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Toaster } from "react-hot-toast"
+import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
+import User from "@/components/User";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -20,9 +22,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} bg-black/10`}>
-       <main>{children}</main>
-       <Toaster />
+      <body className={`${roboto.className} bg-dark-300 relative`}>
+       <main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+        >
+            {children}
+        </ThemeProvider>
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+        />
+       </main>
+       <User />
       </body>
     </html>
   );

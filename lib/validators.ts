@@ -1,12 +1,19 @@
 import { z } from "zod"
 
 export const signUpFormSchema = z.object({
-    name: z.string().min(2).max(50),
-    email: z.string().min(2).max(50),
+    name: z.string().min(2,
+        "name must be at least two characters"
+    ).max(100, "name must cannot be more than 50 characters"),
+    email: z.string().email("invalid email address"),
+    address: z.string().min(2).max(50),
+    contact: z.string(),
+    age: z.string(),
+    location: z.string(),
+    id_number: z.string(),
 })
 
 export const signInFormSchema = z.object({
-    email: z.string().min(2).max(50),
+    email: z.string().email("invalid email address")
 })
 
 export const pharmacistSchema = z.object({

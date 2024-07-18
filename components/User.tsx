@@ -1,27 +1,31 @@
 "use client"
 
 import { FaUser } from "react-icons/fa6";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { IoMdLogOut } from "react-icons/io";
 import { clearUserId, clearUserRole } from "@/lib/actions/customer.actions";
 import { clearPharmacyId } from "@/lib/actions/pharmacy.actions";
 import { useRouter } from "next/navigation";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { IoMdSettings } from "react-icons/io";
+import UserSettings from "./UserSettings";
+
+
+
+
+
 
 export default function User() {
-  const router = useRouter()
 
-  const handleLogout = async () => {
-    await clearUserRole()
-    await clearUserId()
-    await clearPharmacyId()
-    router.push("/accounts/sign-in")
-  }
+
 
   return (
-    <section>
-     <DropdownMenu>
+    <section className="fixed right-10 bottom-10">
+      {/* <DropdownMenu>
       <DropdownMenuTrigger>
        <div>
         <FaUser fontSize={22} className="cursor-pointer" />
@@ -49,16 +53,31 @@ export default function User() {
        </DropdownMenuItem>
        <Separator className="bg-gray-300" />
        <DropdownMenuItem className="cursor-pointer">
-        <div
-         className="flex items-center gap-2 cursor-pointer"
-         onClick={handleLogout}
-        >
-         <div><IoMdLogOut className="text-blue-600" fontSize={20} /></div>
-         <p className="hover:text-zinc-500 transition-colors">Logout</p>
-        </div>
+        
        </DropdownMenuItem>
       </DropdownMenuContent>
-     </DropdownMenu>
+     </DropdownMenu> */}
+     <AlertDialog>
+       <AlertDialogTrigger>
+        <div className="">
+         <IoMdSettings fontSize={30} className="text-blue-500" />
+        </div>
+       </AlertDialogTrigger>
+       <AlertDialogContent className="bg-dark-300 border-0 rounded text-white">
+        <AlertDialogHeader>
+         <AlertDialogTitle>Settings</AlertDialogTitle>
+          <AlertDialogDescription>
+           <UserSettings />
+         </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel className="bg-blue-600 hover:bg-blue-600
+           active:bg-blue-600 border-0 rounded">
+            Cancel
+          </AlertDialogCancel>
+        </AlertDialogFooter>
+       </AlertDialogContent>
+      </AlertDialog>
     </section>
   )
 }

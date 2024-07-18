@@ -12,6 +12,15 @@ export function cn(...inputs: ClassValue[]) {
 export const signUpFormInitialValues = {
   name: "",
   email: "",
+  address: "",
+  contact: "",
+  age:"",
+  location: "",
+  id_number: "",
+}
+
+export const signInFormInitialValues = {
+  email: "",
 }
 
 export const pharmacistInitialValues = {

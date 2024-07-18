@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { Input } from "./ui/input";
-import User from "./User";
 import Link from "next/link";
 
 
@@ -9,22 +7,14 @@ export default function Navbar() {
     <nav className="flex items-center justify-between">
      <Link href="/" className="flex items-center gap-2">
       <Image
-       src="/assets/favicon.ico"
+       src="/assets/icons/logo-full.png"
        alt="logo"
-       width={40}
-       height={40}
+       width={24}
+       height={24}
        className="rounded-full"
       />
-      <p className="text-gray-700 font-bold">pharmX</p>
+      <p className="text-white font-bold">Pharm X</p>
      </Link>
-
-     <div>
-      <Input
-       className="border border-[#ccc] rounded w-[150%]"
-       placeholder="type a pharmacy name / location"
-      />
-     </div>
-     <User />
     </nav>
   )
 }
