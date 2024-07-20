@@ -19,9 +19,10 @@ import { addProductInitialValues, uploadImageToFirebase } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ChangeEvent, useState } from "react"
-import { getPharmacyId } from "@/lib/actions/pharmacy.actions"
-import { createDrug } from "@/lib/actions/drug.actions"
+import { getPharmacy, getPharmacyId } from "@/lib/actions/pharmacy.actions"
+import { addDrug } from "@/lib/actions/drug.actions"
 import { usePathname } from "next/navigation"
+import { getUserId } from "@/lib/actions/customer.actions"
 
 
 
@@ -44,14 +45,19 @@ export default function AddProduct() {
     if (!drugImageToUpload) return
 
     const uploadedDrugImageUrl = await uploadImageToFirebase("drugs", drugImageToUpload)
-    const pharmacyId = await getPharmacyId()
+  
+    const userId = await getUserId()
+    const pharmacy = JSON.parse((await getPharmacy(userId!) as string)) as Pharmacy
+
+    const pharmacyId = pharmacy.pharmacy._id
 
     const drugData = {
       ...values,
       image: uploadedDrugImageUrl,
       pharmacy: pharmacyId,
     }
-    await createDrug(drugData, pathname)
+
+    await addDrug(drugData, pathname, pharmacyId)
 
     form.reset()
   }
@@ -65,7 +71,7 @@ export default function AddProduct() {
         active:bg-blue-600 hover:bg-blue-600 rounded cursor-pointer">Add Product</Button>
        </div>
       </AlertDialogTrigger>
-      <AlertDialogContent className="bg-white rounded border border-gray-700">
+      <AlertDialogContent className="bg-white rounded border border-gray-700 text-gray-800">
        <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
         <AlertDialogHeader>

@@ -64,8 +64,6 @@ export default function CustomerSignUpForm() {
      setLoading("loading")
      await createUserWithEmailAndPassword(auth, formData.email, formData.password)
      const customer = JSON.parse((await createUser(formData)) as string) as CustomerResponse
-     console.log(customer.customer._id)
-     await setUserId(customer.customer._id)
      setLoading("done")
      toast.success("account created!")
      router.push("/accounts/sign-in")
@@ -81,7 +79,7 @@ export default function CustomerSignUpForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
        <div className="grid grid-cols-2 gap-2">
         <FormField
-         control={form.control}
+        control={form.control}
         name="name"
         render={({ field }) => (
          <FormItem>
@@ -273,7 +271,7 @@ export default function CustomerSignUpForm() {
         className="text-blue-600 underline">sign in</Link>
        </p>
        {/* REDESIGN sign in part */}
-       <Link href="#" className="mt-3 text-blue-600 text-xs underline">
+       <Link href="/join-us/register-your-pharmacy" className="mt-3 text-blue-600 text-xs underline">
         Register your pharmacy
        </Link>
       </div>

@@ -16,24 +16,32 @@ export const signInFormSchema = z.object({
     email: z.string().email("invalid email address")
 })
 
-export const pharmacistSchema = z.object({
-    name: z.string().min(2).max(50),
-    email: z.string().email(),
-    license: z.string().min(2).max(100),
-    experience_level: z.string().min(2).max(20),
-    phone: z.string().min(2).max(150),
-    address: z.string().min(2).max(80),
-    bio: z.string().min(2).max(1000)
+export const registerPharmacySchema = z.object({
+    name: z.string().min(2, "must be at least 2 characters")
+    .max(50, "must be less than 50 characters"),
+    email: z.string().email("invalid email address"),
+    license: z.string().min(2, "must be at least 2 characters")
+    .max(100, "must be less than 100 characters"),
+    experience_level: z.string().min(1, "must be at least 1 characters")
+    .max(20, "must be less than 20 characters"),
+    phone: z.string().min(2, "must be at least 2 characters")
+    .max(50, "must be less than 50 characters"),
+    address: z.string().min(2, "must be at least 2 characters")
+    .max(80, "must be less than 80 characters"),
+   
+    pharmacy_name: z.string().min(2, "must be at least 2 characters")
+    .max(50, "must be less than 50 characters"),
+    pharmacy_location: z.string().min(2, "must be at least 2 characters")
+    .max(50, "must be less than 50 characters"),
+    working_hours: z.string().min(2, "must be at least 2 characters")
+    .max(1000, "must be less than 1000 characters"),
+    pharmacy_address: z.string().min(2, "must be at least 2 characters")
+    .max(100, "must be less than 100 characters"),
+    pharmacy_email: z.string().email("invalid email address"),
+    description: z.string().min(2, "must be at least 2 characters")
+    .max(400, "must be less than 400 characters"),
 })
 
-export const pharmacySchema = z.object({
-    pharmacy_name: z.string().min(2).max(50),
-    pharmacy_location: z.string().min(2).max(50),
-    working_hours: z.string().min(2).max(100),
-    pharmacy_address: z.string().min(2).max(100),
-    pharmacy_email: z.string().email(),
-    description: z.string().min(2).max(400),
-})
 
 export const addProductSchema = z.object({
     name: z.string().min(2).max(250),
@@ -60,3 +68,12 @@ export const customerFormSchema = z.object({
     address: z.string().min(2).max(50),
 })
   
+
+export const billingFormSchema = z.object({
+    recipient_address: z.string()
+     .min(2, "must be at least 2 characters")
+     .max(50, "must be less than 50 characters"),
+    recipient_contact: z.string()
+     .min(2, "must be at least 2 characters")
+     .max(50, "must be less than 50 characters")
+})

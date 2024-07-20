@@ -11,11 +11,11 @@ export default function Drugs({ drugsInfo }: Props) {
      <h1>Drugs found!</h1>
 
      <section className="mt-3 grid grid-cols-2 gap-2">
-      { drugsInfo.drugs.map(drug => (
+      { drugsInfo.drugs?.map(drug => (
         <section
          key={drug._id}
          className="bg-white rounded p-1 cursor-pointer shadow hover:scale-105 transition-all duration-500">
-          <Link href={`drug/${drug._id}`}>
+          <Link href={`/pharmacies/drug/${drug._id}`}>
            <Image
             src={drug.image || ""}
             alt="drug info"
@@ -24,8 +24,8 @@ export default function Drugs({ drugsInfo }: Props) {
             className="rounded"
            />
           </Link>
-         <p className="text-center">{drug.name}</p>
-         <p className="text-center">₵{drug.price}</p>
+         <p className="text-center text-gray-800">{drug.name}</p>
+         <p className="text-center text-gray-800">₵{drug.price}</p>
         </section>
       ))}
      </section>

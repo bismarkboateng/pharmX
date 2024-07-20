@@ -8,14 +8,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation"
 import { IoMdLogOut } from "react-icons/io";
 import { useEffect, useState } from "react";
-import { clearPharmacyId } from "@/lib/actions/pharmacy.actions";
-import { clearUserId, clearUserRole, getUserId } from "@/lib/actions/customer.actions";
+import { clearUserId, getUserId } from "@/lib/actions/customer.actions";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import toast from "react-hot-toast";
 
 
-export default function SidebarLinks({ pharmacyId }: { pharmacyId: string }) {
+export default function SidebarLinks({ userId }: { userId: string }) {
   const pathname = usePathname()
   const [error, setError] = useState("")
   const router = useRouter()
@@ -35,8 +34,6 @@ export default function SidebarLinks({ pharmacyId }: { pharmacyId: string }) {
   const handleLogout = async () => {
     try {
       await signOut(auth)
-      await clearPharmacyId()
-      await clearUserRole()
       await clearUserId()
       router.push("/accounts/sign-in")
     } catch (error) {

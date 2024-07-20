@@ -6,8 +6,6 @@ import { getDrugBasedOnID } from "@/lib/actions/drug.actions";
 import Image from "next/image";
 import { useState, useEffect } from "react"
 
-
-
 type Props = {
     params: {
         drugId: string;
@@ -26,20 +24,19 @@ export default function DrugDetail({ params }: Props) {
     getDrugInfo()
   }, [params.drugId])
 
-  console.log(drugDetail?.drug)
-
   return (
     <section className="grid grid-cols-2 gap-10 items-start mt-20">
-     <section className="flex flex-col bg-white p-3 rounded
+     <section className="flex flex-col border border-dark-500 p-3 rounded
      ">
       <div className="flex flex-row gap-2">
        <div>
         <Image
          src={drugDetail?.drug?.image || ""}
-         alt={drugDetail?.drug.name || ""}
+         alt={drugDetail?.drug?.name || ""}
          width={150}
          height={150}
          className="rounded"
+         priority
         />
        </div>
        <div>
@@ -58,17 +55,9 @@ export default function DrugDetail({ params }: Props) {
       </div>
      </section>
 
-     <section className="bg-white rounded p-2">
+     <section className="border border-dark-500 rounded p-2">
       <h1 className="text-center font-bold">Billing Information</h1>
-
-      <BillingForm />
-      <div>
-       <p className="text-xs italic text-gray-400">**you only pay when you get the product</p>
-       <Button className="bg-blue-600 text-white hover:bg-blue-600 active:bg-blue-600
-       rounded w-full cursor-pointer">
-        Place Order
-       </Button>
-      </div>
+      <BillingForm drugId={drugDetail?.drug._id!} />
      </section>
 
     </section>

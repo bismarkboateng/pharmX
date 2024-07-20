@@ -29,20 +29,6 @@ type UpdateCustomerParams = {
     onboarded: boolean;
 }
 
-// user role in cookie
-
-export const setUserRole = async (role: string) => {
-    await cookies().set("role", role)
-}
-
-export const getUserRole = async () => {
-    const cookie = await cookies().get("role")
-    if (cookie) return cookie.value
-}
-
-export const clearUserRole = async () => {
-    await cookies().delete("role")
-}
 
 // user id's in cookie
 export const setUserId = async (id: string) => {

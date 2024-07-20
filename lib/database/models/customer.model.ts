@@ -6,6 +6,8 @@ const CustomerSchema = new Schema({
     location: { type: String, required: false },
     prescription: [{ type: Types.ObjectId, ref: "Prescription" }],
     id_number: { type: String, required: false },
+    billing_address: { type: String, required: false },
+    billing_contact: { type: String, required: false },
 })
 
 const Customer = models.Customer || model("Customer", CustomerSchema);

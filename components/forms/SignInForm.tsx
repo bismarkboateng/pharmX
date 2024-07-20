@@ -7,13 +7,12 @@ import { signInFormSchema } from "@/lib/validators"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { signInFormInitialValues } from "@/lib/utils"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 import { useState } from "react"
 import Link from "next/link"
 import { Loader2 } from "lucide-react"
-import { checkUserByEmail, getUserRole, setUserId } from "@/lib/actions/customer.actions"
+import { checkUserByEmail, setUserId } from "@/lib/actions/customer.actions"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import Image from "next/image"
@@ -23,48 +22,53 @@ import { MdOutlineKey } from "react-icons/md"
 export default function SignInForm() {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState("")
-  const [userRole, setUserRole] = useState("")
   const [user, setUser] = useState("")
-  const [error, setError] = useState("")
   const router = useRouter()
 
   const form = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
-    defaultValues: signInFormInitialValues,
+    defaultValues: {
+      email: ""
+    },
   })   
 
   async function onSubmit(values: z.infer<typeof signInFormSchema>) {
     const formData = {
      email: values.email,
      password: password
-    } 
-    
-    const user: SignInUserFromDB = JSON.parse(await checkUserByEmail(formData.email))
- 
-    if (!user.isExist) {
-     toast.error("this email does not exist")
-     return
     }
 
-    await setUserId(user.user._id)
+    if (!formData.email || !formData.password) {
+      toast.error("fields cannot be empty")
+      return
+    }
 
     try {
-     setLoading("loading")
-     await signInWithEmailAndPassword(auth, formData.email, formData.password)
-     toast.success("signed in")
-     setLoading("done")
+      setLoading("loading")
+      const user =  JSON.parse((await checkUserByEmail(formData.email) as string)) as SignInUserFromDB
+      
+      if (!user.isExist) {
+        toast.error("this email does not exist")
+        setLoading("")
+        return
+      }
+      
+      await setUserId(user.user._id)
+      await signInWithEmailAndPassword(auth, formData.email, formData.password)
+      toast.success("signed in!")
 
-     if (user.user.role == "customer") {
-       router.push("/pharmacies")
-     } else if (user.user.role == "pharmacist") {
-       router.push("/pharmacist/onboarding")
-     }
-
+      if (user.user.role == "customer") {
+        router.push("/pharmacies")
+      } else if (user.user.role == "pharmacist") {
+        router.push(`/pharmacy/dashboard/${user.user._id}/drugs`)
+      }
+      setLoading("done")
     } catch (error) {
-     toast.error("this is not your fault, please try again")
-     setLoading("")
+      toast.error("something unexpected happened, please try again")
+      setLoading("")
     }
- 
+    form.reset()
+    setPassword("")
    }
 
   return (
@@ -88,7 +92,7 @@ export default function SignInForm() {
             />
             <Input
              className="border-0 placeholder:text-dark-600 "
-             placeholder="John Doe"
+             placeholder="johndoe@gmail.com"
              {...field}
             />
             </div>

@@ -12,20 +12,22 @@ import { useState, useEffect } from "react"
 import { getPharmacy, getPharmacyId, updatePharmacy } from "@/lib/actions/pharmacy.actions"
 import { Label } from "@/components/ui/label"
 import { toast } from "react-hot-toast"
+import { getUserId } from "@/lib/actions/customer.actions"
+import { Loader2 } from "lucide-react"
+import { usePathname } from "next/navigation"
 
 export default function Settings() {
   const [pharmacyInfo, setPharmacyInfo] = useState<Pharmacy | null>(null)
   const [loading, setLoading] = useState("")
-  const [file, setFile] = useState<FileList | null>(null)
-  const [error, setError] = useState("")
+  const pathname = usePathname()
+
 
   useEffect(() => {
     const getPharmacyInfo = async () => {
-      const pharmacyId = await getPharmacyId()
-      const pharmacy = await getPharmacy(pharmacyId!)
-
-      const parsedPharmacy = JSON.parse(pharmacy!)
-      setPharmacyInfo(parsedPharmacy)
+      const userId = await getUserId()
+      const pharmacy = JSON.parse((await getPharmacy(userId!) as string)) as Pharmacy
+      
+      setPharmacyInfo(pharmacy)
     }
     getPharmacyInfo()
   }, [])
@@ -42,25 +44,16 @@ export default function Settings() {
   })
   
   async function onSubmit(values: z.infer<typeof settingsFormSchema>) {
-    console.log(file)
-    const fileToUpload = file && file[0]
-
-    if (!fileToUpload) {
-      setError("Add an image")
-    }
-
-
     try {
       setLoading("loading")
-      const uploadedFileUrl = await uploadImageToFirebase("pharmacy", fileToUpload)
-      const pharmacyId = await getPharmacyId()
       await updatePharmacy({
         ...values,
-        image: uploadedFileUrl
-      }, pharmacyId!)
+      }, pharmacyInfo?.pharmacy._id!, pathname)
       setLoading("done")
+      toast.success("info updated!")
     } catch (error) {
-      setError("something went wrong, please try again")
+      toast.error("something went wrong, please try again")
+      setLoading("")
     }
   }
 
@@ -71,15 +64,6 @@ export default function Settings() {
      <section className="mt-8">
       <Form {...form}>
        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-        <div className="grid w-full max-w-sm items-center gap-3">
-         <Label htmlFor="pharmacy_image">Pharmacy Image</Label>
-         <Input
-          id="pharmacy_image"
-          type="file"
-          className="account-form_input rounded file:text-blue-600"
-          onChange={event => setFile(event.target.files)}
-         />
-        </div>
         <div className="grid grid-cols-2 space-x-3">
           <FormField
            control={form.control}
@@ -88,7 +72,7 @@ export default function Settings() {
             <FormItem>
               <FormLabel>Pharmacy name</FormLabel>
               <FormControl>
-                <Input className="account-form_input" placeholder="" {...field} />
+                <Input placeholder="pharmacy-name" className="border border-dark-500 bg-dark-400 rounded" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -101,7 +85,7 @@ export default function Settings() {
             <FormItem>
               <FormLabel>Location</FormLabel>
               <FormControl>
-                <Input className="account-form_input" placeholder="Location" {...field} />
+                <Input className="border border-dark-500 bg-dark-400 rounded" placeholder="Location" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -117,7 +101,7 @@ export default function Settings() {
             <FormItem>
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Input className="account-form_input" placeholder="address" {...field} />
+                <Input className="border border-dark-500 bg-dark-400 rounded" placeholder="address" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -130,7 +114,7 @@ export default function Settings() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input className="account-form_input" placeholder="@example.com" {...field} />
+                <Input className="border border-dark-500 bg-dark-400 rounded" placeholder="johndoe@gmail.com" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -143,16 +127,11 @@ export default function Settings() {
          px-20 hover:bg-blue-600 active:bg-blue-600"
          disabled={loading === "loading"}
         >
+          {loading === "loading" && <Loader2 className="w-4 h-4 mr-1 animate-spin" />}
           Save
         </Button>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
        </form>
       </Form>
-      {loading === "done" && (
-        <section className="text-black rounded">
-          {toast("Pharmacy Info has been updated")}
-        </section>
-      )}
      </section>
     </section>
   )

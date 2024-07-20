@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { IoMdLogOut } from "react-icons/io"
-import { clearUserId, clearUserRole } from "@/lib/actions/customer.actions";
+import { clearUserId } from "@/lib/actions/customer.actions";
 import { clearPharmacyId } from "@/lib/actions/pharmacy.actions";
 import { useRouter } from "next/navigation";
 import { Input } from "./ui/input";
@@ -13,9 +13,7 @@ import { Label } from "./ui/label"
 export default function UserSettings() {
   const router = useRouter()
 
-
   const handleLogout = async () => {
-    await clearUserRole()
     await clearUserId()
     await clearPharmacyId()
     router.push("/accounts/sign-in")
@@ -23,7 +21,7 @@ export default function UserSettings() {
 
   return (
     <section className="flex flex-col space-y-6">
-      <Link href="#" className="mt-2">
+      <Link href="/my-orders" className="mt-2">
        Orders
       </Link>
 

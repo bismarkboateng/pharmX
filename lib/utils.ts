@@ -19,21 +19,14 @@ export const signUpFormInitialValues = {
   id_number: "",
 }
 
-export const signInFormInitialValues = {
-  email: "",
-}
-
-export const pharmacistInitialValues = {
+export const registerPharmacyInitialValues = {
   name: "",
   email: "",
   license: "",
   experience_level: "",
   phone: "",
   address: "",
-  bio: "",
-}
 
-export const pharmacyInitialValues = {
   pharmacy_name: "",
   pharmacy_location: "",
   working_hours: "",

@@ -12,12 +12,14 @@ import { searchDrugsWithText } from "@/lib/actions/drug.actions";
 import { getUserId } from "@/lib/actions/customer.actions";
 import { FaDatabase } from "react-icons/fa6";
 import Drugs from "./Drugs";
+import { setPharmacyId } from "@/lib/actions/pharmacy.actions";
 
 
 type Props = {
   pharmacyId: string;
 }
 export default function FileUploader({ pharmacyId }: Props) {
+  console.log(pharmacyId)
   const [loading, setLoading] = useState("")
   const [prescriptionText, setPrescriptionText] = useState("")
   const [prescriptionFile, setPrescriptionFile] = useState<FileList | null>(null)
@@ -25,6 +27,10 @@ export default function FileUploader({ pharmacyId }: Props) {
 
   const submitFile = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    
+    
+    // will be use in the order
+    await setPharmacyId(pharmacyId)
 
     const fileToUpload = prescriptionFile && prescriptionFile[0]
 
@@ -79,7 +85,7 @@ export default function FileUploader({ pharmacyId }: Props) {
         <Input
          id="prescription_file"
          type="file"
-         className="border border-[#ccc] rounded file:text-blue-600"
+         className="border border-dark-500 bg-dark-400 rounded file:text-blue-600"
          onChange={(event) => setPrescriptionFile(event.target.files)}
          accept="application/pdf"
         />

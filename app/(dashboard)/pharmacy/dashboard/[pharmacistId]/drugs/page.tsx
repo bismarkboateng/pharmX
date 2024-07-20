@@ -7,8 +7,8 @@ import { MdDelete } from "react-icons/md";
 import { TiEdit } from "react-icons/ti";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { getDrugsBasedOnPharmacyId } from "@/lib/actions/drug.actions";
-import { getPharmacyId } from "@/lib/actions/pharmacy.actions";
 import { getUserId } from "@/lib/actions/customer.actions";
+import { getPharmacy } from "@/lib/actions/pharmacy.actions";
 
 
 type Props = {
@@ -18,12 +18,12 @@ type Props = {
 }
 export default async function AllDrugs({ params }: Props) {
   const userId = await getUserId()
+  const pharmacy = JSON.parse((await getPharmacy(userId!) as string)) as Pharmacy
 
-  const drugs = await getDrugsBasedOnPharmacyId(userId!)
+  const drugs = await getDrugsBasedOnPharmacyId(pharmacy.pharmacy._id!)
   const parsedDrugs = JSON.parse(drugs!)
-  
 
-
+  // TODO:  check if drug has expired and show it
   return (
     <section className="p-5">
      <AddProduct />
@@ -39,6 +39,7 @@ export default async function AllDrugs({ params }: Props) {
         <TableHead>Stock</TableHead>
         <TableHead>Expiry</TableHead>
         <TableHead>Actions</TableHead>
+        <TableHead>Expired</TableHead>
        </TableRow>
       </TableHeader>
       <TableBody>
@@ -78,6 +79,8 @@ export default async function AllDrugs({ params }: Props) {
            </Tooltip>
           </TooltipProvider>
         </TableCell>
+        {/* THIS SHOULD BE CHANGED */}
+        <TableCell>No</TableCell>
        </TableRow>
        ))}
       </TableBody>

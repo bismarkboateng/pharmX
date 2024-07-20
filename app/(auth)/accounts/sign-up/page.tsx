@@ -28,6 +28,7 @@ export default function Signup() {
         height={1000}
         width={1000}
         className="hidden object-cover md:block h-full w-full"
+        priority
        />
       </div>
 

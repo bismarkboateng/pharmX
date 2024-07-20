@@ -22,10 +22,14 @@ type SearchDrugsWithTextParams = {
     data: string[]
 }
 
-export const createDrug = async (data: CreateDrugParams, pathname: string) => {
+export const addDrug = async (data: CreateDrugParams, pathname: string, pharmacyId: string) => {
     try {
         await connectToDatabase()
         const newDrug = await Drug.create(data)
+        await Pharmacy.findByIdAndUpdate(
+            pharmacyId,
+            { $push: { drugs: newDrug._id }}
+        )
         if (!newDrug) {
             return JSON.stringify({ msg: "could not create drug"})
         }
@@ -36,12 +40,11 @@ export const createDrug = async (data: CreateDrugParams, pathname: string) => {
     }
 }
 
-export const getDrugsBasedOnPharmacyId = async (pharmacistId: string) => {
+export const getDrugsBasedOnPharmacyId = async (pharmacyId: string) => {
     try {
         await connectToDatabase()
-
-        const pharmacy = await Pharmacy.findOne({ pharmacist: pharmacistId })
-        const drugs = await Drug.find({ pharmacy: pharmacy._id })
+        
+        const drugs = await Drug.find({ pharmacy: pharmacyId })
         if (!drugs) {
             return JSON.stringify({ error: "drugs not found"})
         }

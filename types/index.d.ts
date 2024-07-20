@@ -35,14 +35,14 @@ type Pharmacy = {
     pharmacy: {
         _id: string;
         name: string;
-        email: string;
+        description: string;
         location: string;
         address: string;
-        description: string;
+        email: string;
         drugs: [string]
-        orders: [string]
-        pharmacist: string;
         working_hours: string;
+        pharmacist: string;
+        orders: [string]
     }
 }
 
@@ -53,7 +53,6 @@ type Pharmacies = {
         name: string;
         description: string;
         location: string;
-        image: string;
         address: string;
         email: string;
         drugs: [];
@@ -132,11 +131,11 @@ type CustomerResponse = {
 type SignInUserFromDB = {
     isExist: boolean;
     user: {
+        _id: string;
+        name: string;
+        email: string;
         address: string;
         contact: string;
-        email: string;
-        name: string;
         role: string;
-        _id: string;
     }
 }
