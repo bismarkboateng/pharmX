@@ -1,8 +1,6 @@
 import Image from "next/image";
-import PharmacistForm from "@/components/forms/pharmacist/PharmacistForm";
 import { getUserId, getUserInfo } from "@/lib/actions/customer.actions";
 import { redirect } from "next/navigation";
-import PharmacyForm from "@/components/forms/PharmacyForm";
 import RegisterForm from "@/components/forms/RegisterForm";
 
 export default async function Registeryourpharmacy() {
