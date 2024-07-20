@@ -3,6 +3,8 @@
 import { connectToDatabase } from "../database"
 import Customer from "../database/models/customer.model"
 import Order from "../database/models/orders.model"
+import { v4 as uuidv4 } from "uuid"
+
 
 type CreateOrderProps = {
     customer: string,
@@ -47,10 +49,17 @@ export const createOrder = async ({
             customer,
             pharmacy,
             drugs,
-            status
+            status,
+            orderId: `Order-${uuidv4().split("-")[0]}`
         })
 
-        const updatedCustomer = await Customer.findOneAndUpdate({ user: customer }, values, { new: true })
+        const updatedCustomer = await Customer.findOneAndUpdate(
+            { user: customer }, 
+            {
+                recipient_address: values.recipient_address,
+                recipient_contact: values.recipient_contact,
+            },
+            { new: true })
 
         if (!order) {
             return JSON.stringify({
@@ -67,4 +76,25 @@ export const createOrder = async ({
             error
         })
     }    
+}
+
+export const getOrdersByUserId = async (userId: string) => {
+    try {
+        await connectToDatabase()
+        const orders = await Order.find({ customer: userId })
+        if (!orders) {
+            return JSON.stringify({
+                msg: "no orders found"
+            })
+        }
+        return JSON.stringify({
+            msg: "OK",
+            orders,
+        })
+    } catch (error) {
+        return JSON.stringify({
+            msg: "error fetching user orders",
+            error
+        })
+    }
 }

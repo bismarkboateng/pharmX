@@ -19,12 +19,12 @@ type PharmacyParams = {
 
 type DrugType = {
     _id: string;
-    category: string;
-    description: string;
-    expiry_date: string;
-    image: string;
     name: string;
+    image: string;
+    description: string;
+    category: string;
     price: string;
+    expiry_date: string;
     require_prescription: boolean;
     stock_quantity: number;
     manufacturer_details: string;
@@ -138,4 +138,19 @@ type SignInUserFromDB = {
         contact: string;
         role: string;
     }
+}
+
+type OrdersFromDB = {
+    msg: string;
+    orders: {
+        _id: string;
+        customer: string;
+        pharmacy: string;
+        drugs: string[];
+        status: string;
+        createdAt: string;
+        updatedAt: string;
+        orderId?: string;
+
+    }[]
 }

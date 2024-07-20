@@ -101,3 +101,19 @@ export const getDrugBasedOnID = async (id: string) => {
         })
     }
 }
+
+export const getDrugsBasedOnMultipleIds = async  (drugIds: string[]) => {
+    try {
+        await connectToDatabase()
+        const drugs = await Drug.find({ _id: { $in: drugIds}})
+        return JSON.stringify({
+            msg: "OK",
+            drugs
+        })
+    } catch (error) {
+        return JSON.stringify({
+            msg: "error fetching drug",
+            error
+        })
+    }
+}

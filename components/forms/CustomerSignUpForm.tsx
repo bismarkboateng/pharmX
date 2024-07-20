@@ -13,7 +13,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 import { useState } from "react"
 import Link from "next/link"
-import { checkUserByEmail, createUser, setUserId, setUserRole } from "@/lib/actions/customer.actions"
+import { checkUserByEmail, createUser, setUserId } from "@/lib/actions/customer.actions"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { MdOutlineKey } from "react-icons/md";
