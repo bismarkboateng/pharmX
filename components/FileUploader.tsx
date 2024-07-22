@@ -13,6 +13,7 @@ import { getUserId } from "@/lib/actions/customer.actions";
 import { FaDatabase } from "react-icons/fa6";
 import Drugs from "./Drugs";
 import { setPharmacyId } from "@/lib/actions/pharmacy.actions";
+import { EXTRACT_TEXT_ENDPOINT } from "@/lib/api-config";
 
 
 type Props = {
@@ -57,7 +58,7 @@ export default function FileUploader({ pharmacyId }: Props) {
         // EXTRACT TEXT FROM PDF
         const formData = new FormData()
         formData.append("pdfFile", fileToUpload)
-        const { data } = await axios.post("http://localhost:4000/extract-text", formData)
+        const { data } = await axios.post(EXTRACT_TEXT_ENDPOINT, formData)
 
         // INTEGRATE GPT-3 TO GET LIST OF MEDICINES
         // const medicines = await axios.post("/end-point", data)

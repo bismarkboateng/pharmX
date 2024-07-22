@@ -16,7 +16,7 @@ export default function PharmacyCard({ pharmacies }: Props) {
 
   return (
     <>
-    {pharmacies.pharmacies.map(pharmacy => (
+    {pharmacies.pharmacies?.map(pharmacy => (
      <Link href={`/pharmacies/${pharmacy._id}`} key={pharmacy._id} className="border border-[#ccc] rounded py-3 px-4 cursor-pointer hover:scale-105 transition-all
     duration-800 space-y-2">
      <h1>{pharmacy.name}</h1>
