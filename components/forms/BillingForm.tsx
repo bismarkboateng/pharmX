@@ -36,6 +36,7 @@ export default function BillingForm({ drugId }: { drugId: string }) {
     const pharmacyId = await getPharmacyId()
     const userId = await getUserId()
 
+    // STATUS : pending, shipped, delivered 
     try {
       setLoading("loading")
       await createOrder({

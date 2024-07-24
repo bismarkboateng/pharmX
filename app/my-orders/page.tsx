@@ -40,7 +40,7 @@ export default async function page() {
         <div>
          <div className="mt-2 font-medium">{drug.name}</div>
          {orders.orders.map(order => (
-          <div key={order._id} className="text-sm text-gray-500">Order-{order?.orderId}</div>  
+          <div key={order._id} className="text-sm text-gray-500">{order?.orderId}</div>  
           ))}
         </div>
         <div>

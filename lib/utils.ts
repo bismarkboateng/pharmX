@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { storage } from "./firebase"
 import { twMerge } from "tailwind-merge"
 import { v4 } from "uuid"
-
+import moment from "moment"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -87,4 +87,12 @@ export const uploadImageToFirebase = async (type: string, fileToUpload: any) => 
   }
 
   return uploadedUrl
+}
+
+export const getMonthsTillExpiryDate = (expiry_date: string) => {
+  const expiryDate = moment(expiry_date, "YYYY-MM-DD")
+  const currentDate = moment()
+  const monthsUntilExpiry = Math.abs(expiryDate.diff(currentDate, "months"))
+
+  return monthsUntilExpiry
 }

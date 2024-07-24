@@ -19,6 +19,7 @@ import { EXTRACT_TEXT_ENDPOINT } from "@/lib/api-config";
 type Props = {
   pharmacyId: string;
 }
+
 export default function FileUploader({ pharmacyId }: Props) {
   console.log(pharmacyId)
   const [loading, setLoading] = useState("")
@@ -52,7 +53,7 @@ export default function FileUploader({ pharmacyId }: Props) {
 
     try {
         setLoading("loading")
-        // const file = await uploadImageToFirebase("prescription", fileToUpload)
+        const file = await uploadImageToFirebase("prescription", fileToUpload)
         console.log("before extracting")
 
         // EXTRACT TEXT FROM PDF
@@ -71,6 +72,7 @@ export default function FileUploader({ pharmacyId }: Props) {
         setLoading("done")
         toast.success("file uploaded successfully!")
     } catch (error) {
+        console.error(error)
         toast.error("something unexpected happened, please try again")
         setLoading("")
     } 

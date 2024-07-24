@@ -1,5 +1,4 @@
 import { Schema, Types, model, models } from "mongoose";
-import { string } from "zod";
 
 const OrderSchema = new Schema({
     customer: { type: Types.ObjectId, ref: "Customer" },
