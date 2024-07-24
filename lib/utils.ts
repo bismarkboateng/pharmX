@@ -101,33 +101,9 @@ export const farOptions = {
 };
 // end of map stuffs
 
-// getting location
-export const getLocation = () => {
-  return new Promise((resolve, reject) => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          const center = { lat: latitude, lng: longitude };
-          console.log(center)
-          resolve(center);
-        },
-        (error) => {
-          console.error('Error getting location:', error);
-          reject(error);
-        }
-      );
-    } else {
-      console.error('Geolocation is not supported by this browser.');
-      reject(new Error('Geolocation is not supported by this browser.'));
-    }
-  });
-};
-
 export const uploadImageToFirebase = async (type: string, fileToUpload: any) => {
   let uploadedUrl = ""
-  
+
   try {
 
     let fileRef

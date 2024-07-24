@@ -7,9 +7,7 @@ import Maps from "@/components/maps/Maps"
 
 export default async function Pharmacies() {
   const userId = await getUserId()
-
   const closePharmacies = JSON.parse((await getPharmaciesBasedOnUserLocation(userId!) as string)) as Pharmacies
-
 
   return (
     <section className="mt-10 flex">

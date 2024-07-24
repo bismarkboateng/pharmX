@@ -16,6 +16,7 @@ type createPharmacyParams = {
     email: string;
     working_hours: string;
     address: string;
+    coordinates: { lat: number, lng: number };
 }
 
 type UpdatePharmacyParams = {

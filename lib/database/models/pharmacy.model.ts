@@ -11,7 +11,11 @@ const PharmacySchema = new Schema({
     }],
     working_hours: { type: String, required: true },
     pharmacist: { type: Types.ObjectId, ref: "Pharmacist" },
-    orders: [{ type: Types.ObjectId, ref: "Order" }]
+    orders: [{ type: Types.ObjectId, ref: "Order" }],
+    coordinates: {
+        lat: { type: Number, required: false },
+        lng: { type: Number, required: false },
+    }
 })
 
 const Pharmacy = models.Pharmacy || model("Pharmacy", PharmacySchema);

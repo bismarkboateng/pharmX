@@ -1,38 +1,52 @@
 "use client"
 
-import { useState, useMemo, useCallback, useRef } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import {
   GoogleMap, Marker, DirectionsRenderer,
   Circle, MarkerClusterer,
 } from "@react-google-maps/api";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Places from "./Places";
-import { closeOptions, farOptions, generateMultipleCoordinates, getLocation, middleOptions } from "@/lib/utils";
+import { closeOptions, farOptions, generateMultipleCoordinates, middleOptions } from "@/lib/utils";
 import cluster from "cluster";
+import { Coordinate } from "recharts/types/util/types";
 // import Distance from "./distance";
 
 interface Coordinates {
     lat: number;
     lng: number;
-  }
+}
 
-  
 type LatLngLiteral = google.maps.LatLngLiteral;
 type DirectionsResult = google.maps.DirectionsResult;
 type MapOptions = google.maps.MapOptions;
 
-const center: Coordinates = { lat: 6.670208341772912, lng: -1.561673660214171 };
 const radii = [5, 10, 15]; // Radii in kilometers
 const countPerRadius = 4; // 12 coordinates, 4 for each radius
 
 export default function RenderMap() {
+    const [coords, setCoords] = useState({} as Coordinates)
     const mapRef = useRef<GoogleMap>()
-    const center = useMemo<LatLngLiteral>(() => ({ lat: 6.670208341772912, lng: -1.561673660214171 }), [])
+    const center = useMemo(() => (coords), [])
     const options = useMemo<MapOptions>(() => ({
         mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID,
         disableDefaultUI: true,
         clickableIcons: false,
     }), [])
+
+    useEffect(() => {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setCoords({ lat: position.coords.latitude, lng: position.coords.longitude })
+          },
+          (error) => alert("could not get your location"),
+          { enableHighAccuracy: true }
+        )
+      } else {
+        alert("Browser does not support location service")
+      }
+    }, [])
 
     const onLoad = useCallback((map: any) => (mapRef.current = map), [])
     const pharmacies = useMemo(() => generateMultipleCoordinates(center, radii, countPerRadius), [center])
