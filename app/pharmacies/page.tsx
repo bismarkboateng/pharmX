@@ -2,6 +2,7 @@ import { Separator } from "@/components/ui/separator"
 import PharmacyCard from "@/components/PharmacyCard"
 import { getUserId } from "@/lib/actions/customer.actions"
 import { getPharmaciesBasedOnUserLocation } from "@/lib/actions/pharmacy.actions"
+import Maps from "@/components/maps/Maps"
 
 
 export default async function Pharmacies() {
@@ -10,10 +11,9 @@ export default async function Pharmacies() {
   const closePharmacies = JSON.parse((await getPharmaciesBasedOnUserLocation(userId!) as string)) as Pharmacies
 
 
-
   return (
-    <section className="flex">
-     <section className="mt-2 w-[50%]">
+    <section className="mt-10 flex">
+     <section className="w-[50%]">
      <section className="">
       <h1 className="text-2xl font-bold mb-4">Pharmacies closer to you</h1>
       <div className="grid grid-cols-3 gap-2">
@@ -30,8 +30,8 @@ export default async function Pharmacies() {
      </section>
      </section>
 
-     <section className="mt-2 w-[50%] min-h-screen">
-      Map here
+     <section className="w-[50%] min-h-screen">
+      <Maps />
      </section>
     </section>
   )

@@ -8,3 +8,8 @@
     @apply border border-dark-400 bg-dark-300  !important;
   }
 }
+
+.map-container {
+  width: 100%;
+  height: 100%;
+}
