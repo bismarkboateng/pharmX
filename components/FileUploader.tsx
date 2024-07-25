@@ -54,7 +54,6 @@ export default function FileUploader({ pharmacyId }: Props) {
     try {
         setLoading("loading")
         const file = await uploadImageToFirebase("prescription", fileToUpload)
-        console.log("before extracting")
 
         // EXTRACT TEXT FROM PDF
         const formData = new FormData()
@@ -82,7 +81,7 @@ export default function FileUploader({ pharmacyId }: Props) {
   return (
     <section>
       <form onSubmit={submitFile}>
-       <div className="grid w-full max-w-sm items-center gap-1.5 mt-10 pl-7">
+       <div className="grid w-full max-w-sm items-center gap-1.5 mt-0 md:mt-10 md:pl-7">
         <Label htmlFor="prescription_file" className="text-lg font-bold">Prescription file</Label>
         <p className="text-sm italic">upload a prescription file</p>
         <Input
@@ -95,7 +94,7 @@ export default function FileUploader({ pharmacyId }: Props) {
        </div>
        <Button
         type="submit"
-        className="bg-blue-600 hover:bg-blue-600 active:bg-blue-600 rounded mt-5 ml-7
+        className="w-full md:w-1/2 bg-blue-600 hover:bg-blue-600 active:bg-blue-600 rounded mt-5 md:ml-7
         text-white"
         disabled={loading === "loading"}
        >

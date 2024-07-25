@@ -2,12 +2,11 @@ import CustomerSignUpForm from "@/components/forms/CustomerSignUpForm"
 import Image from "next/image"
 
 
-
 export default function Signup() {
 
   return (
-    <section className="flex w-full min-h-screen rounded shadow">
-      <section className="w-[50%] p-24">
+    <section className="flex flex-col lg:flex-row w-full min-h-screen rounded shadow">
+      <section className="w-full p-5 md:p-10 lg:w-[50%] lg:p-10 2xl:p-24">
        <div className="flex items-center gap-2 mb-5">
         <Image
          src="/assets/icons/logo-full.png"
@@ -21,7 +20,7 @@ export default function Signup() {
        <CustomerSignUpForm />
       </section>
 
-      <div className="w-[50%]">
+      <div className="hidden lg:block w-[50%]">
        <Image
         src="/assets/images/onboarding-img.png"
         alt="patient"

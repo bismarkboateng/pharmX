@@ -72,7 +72,7 @@ export default function SignInForm() {
    }
 
   return (
-    <section>
+    <section className="">
      <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
       <FormField
@@ -91,7 +91,7 @@ export default function SignInForm() {
              className="ml-2"
             />
             <Input
-             className="border-0 placeholder:text-dark-600 "
+             className="border-0 placeholder:text-dark-600"
              placeholder="johndoe@gmail.com"
              {...field}
             />
@@ -104,7 +104,7 @@ export default function SignInForm() {
 
         <div>
          <label className="mb-2 block text-sm">Password</label>
-         <div className="w-full placeholder:text-gray-500 outline-none pl-3 py-2
+         <div className=" placeholder:text-gray-500 outline-none pl-3 py-2
            rounded border border-dark-500 bg-dark-400 flex ">
           <MdOutlineKey fontSize={23} className="text-gray-500" />
           <input
@@ -112,7 +112,7 @@ export default function SignInForm() {
            name="password"
            value={password}
            onChange={event => setPassword(event.target.value)}
-           className="border-0 outline-0 bg-dark-400 ml-3"
+           className="border-0 outline-0 bg-dark-400 ml-3 w-full"
           />
          </div>
         </div>

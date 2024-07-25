@@ -59,9 +59,9 @@ export default function Settings() {
 
 
   return (
-    <section>
-     <h1 className="text-xl font-bold mt-5">Settings</h1>
-     <section className="mt-8">
+    <section className="p-10 lg:p-0">
+     <h1 className="text-xl font-bold mt-20">Settings</h1>
+     <section className="mt-10">
       <Form {...form}>
        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
         <div className="grid grid-cols-2 space-x-3">

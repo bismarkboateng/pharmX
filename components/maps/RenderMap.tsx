@@ -27,7 +27,7 @@ const countPerRadius = 4; // 12 coordinates, 4 for each radius
 export default function RenderMap() {
     const [coords, setCoords] = useState({} as Coordinates)
     const mapRef = useRef<GoogleMap>()
-    const center = useMemo(() => (coords), [])
+    const center = useMemo(() => (coords), [coords])
     const options = useMemo<MapOptions>(() => ({
         mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID,
         disableDefaultUI: true,

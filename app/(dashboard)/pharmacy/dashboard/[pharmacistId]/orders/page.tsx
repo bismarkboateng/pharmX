@@ -45,9 +45,9 @@ export default function OrdersPage() {
   }
 
   return (
-    <section>
-      <h1 className="text-xl font-bold mt-5">Orders</h1>
-      <section className="mt-5">
+    <section className="p-9 lg:p-0">
+      <h1 className="text-xl font-bold mt-20">Orders</h1>
+      <section className="mt-10">
         <Table>
           <TableHeader>
             <TableRow>

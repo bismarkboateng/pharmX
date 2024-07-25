@@ -5,12 +5,13 @@ import { IoMdLogOut } from "react-icons/io";
 import { clearUserId } from "@/lib/actions/customer.actions";
 import { clearPharmacyId } from "@/lib/actions/pharmacy.actions";
 import { usePathname, useRouter } from "next/navigation";
-import { IoMdSettings } from "react-icons/io";
 import {
   DropdownMenu, DropdownMenuContent,
   DropdownMenuItem, DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { FaUserCircle } from "react-icons/fa";
+
 
 
 export default function User() {
@@ -25,13 +26,13 @@ export default function User() {
 
 
   return (
-    <section className="fixed right-10 bottom-10">
+    <section className="pt-2">
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <div className="">
+          <div>
             {pathname === "/pharmacies"
              ? (
-              <IoMdSettings fontSize={30} className="text-blue-500" />
+              <FaUserCircle fontSize={25} className="text-blue-500" />
              )
              : ""}
           </div>

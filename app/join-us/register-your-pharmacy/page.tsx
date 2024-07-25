@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getUserId, getUserInfo } from "@/lib/actions/customer.actions";
 import { redirect } from "next/navigation";
 import RegisterForm from "@/components/forms/RegisterForm";
+import Link from "next/link";
 
 export default async function Registeryourpharmacy() {
     const role = "pharmacist"
@@ -11,8 +12,8 @@ export default async function Registeryourpharmacy() {
   const parsedPharmacistInfo = JSON.parse(pharmacistInfo!)
   
   return (
-    <section className="p-5">
-     <div className="flex items-center gap-2 mb-5 ml-3">
+    <section className="p-3 md:p-10">
+     <Link href="/" className="flex items-center gap-2 mb-5">
       <Image
         src="/assets/icons/logo-full.png"
         alt="pharm x logo"
@@ -20,7 +21,7 @@ export default async function Registeryourpharmacy() {
         height={24}
       />
       <span className="text-xl font-bold">Pharm X</span>
-     </div>
+     </Link>
      <RegisterForm />
     </section>
   )

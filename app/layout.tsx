@@ -3,7 +3,6 @@ import { Roboto } from "next/font/google";
 import { Toaster } from "react-hot-toast"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
-import User from "@/components/User";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -35,7 +34,6 @@ export default function RootLayout({
           reverseOrder={false}
         />
        </main>
-       <User />
       </body>
     </html>
   );

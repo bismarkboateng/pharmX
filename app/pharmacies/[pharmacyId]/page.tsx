@@ -13,9 +13,9 @@ export default async function PharmacyDetail({ params }: Props) {
   const pharmacy = JSON.parse((await getPharmacyBasedOnPharmacyId(pharmacyId) as string))
 
   return (
-    <section>
-      <section className="grid grid-cols-2">
-        <section className="mt-10 border-r border-gray-600 h-screen p-3">
+    <section className="">
+      <section className="grid grid-cols-1 md:grid-cols-2">
+        <section className="mt-10 md:border-r md:border-gray-600 md:h-screen p-3">
           <h1 className="text-2xl font-bold mb-2">
             {pharmacy.pharmacy?.name}
           </h1>
@@ -31,8 +31,8 @@ export default async function PharmacyDetail({ params }: Props) {
           </div>
         </section>
 
-        <section className="p-3">
-          <h1 className="text-center font-bold text-xl">Access drugs at {pharmacy.pharmacy?.name}</h1>
+        <section className="mt-10 md:mt-0 p-3">
+          <h1 className="mb-3 md:mb-0 md:text-center font-bold text-xl">Access drugs at {pharmacy.pharmacy?.name}</h1>
           <FileUploader pharmacyId={params.pharmacyId}/>
         </section>
       </section>

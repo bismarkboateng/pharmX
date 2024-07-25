@@ -84,8 +84,8 @@ export default function RegisterForm() {
     return (
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
-        <section className="flex gap-2">
-          <section className="w-[50%] p-3 space-y-2">
+        <section className="flex flex-col lg:flex-row gap-5">
+          <section className="w-full lg:w-[50%] space-y-2">
           <h3 className="text-xl font-bold mb-5">Fill in your info</h3>
             {/* full name and email */}
             <div className="grid grid-cols-2 gap-2 mt-2">
@@ -192,7 +192,7 @@ export default function RegisterForm() {
 
           </section>
 
-          <section className="w-[50%] p-3 space-y-2">
+          <section className="w-full lg:w-[50%] mt-5 lg:mt-0 space-y-2">
             <h3 className="text-xl font-bold mb-5">Fill in your pharmacy info</h3>
             <div className="grid grid-cols-2 gap-2 mt-4">
               <FormField
@@ -295,8 +295,8 @@ export default function RegisterForm() {
 
         <Button
           type="submit"
-          className="bg-blue-600 text-white w-[20%] rounded cursor-pointer
-          active:bg-blue-600 hover:bg-blue-600 ml-3"
+          className="bg-blue-600 text-white w-full md:w-[20%] rounded cursor-pointer
+          active:bg-blue-600 hover:bg-blue-600"
           disabled={loading === "loading"}
         >
           {loading === "loading" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

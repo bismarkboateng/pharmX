@@ -23,8 +23,8 @@ export default function PharmacyDashboard({ params: { pharmacyId } }: PharamcyDa
   // TODO: fetch the orders from the db and render it here
 
   return (
-    <section className="pr-2">
-      <section className="mt-6">
+    <section className="p-5 ">
+      <section className="mt-12">
         <h1 className="ml-8 font-bold">All Orders</h1>
         <section className="mt-5 w-full h-[50vh] p-0">
           <ResponsiveContainer width={"100%"}>
