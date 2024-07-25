@@ -1,7 +1,5 @@
-import { getUserId } from "@/lib/actions/customer.actions";
 import User from "@/lib/database/models/user.model";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers"
 
 import { type NextRequest } from 'next/server'
 import { connectToDatabase } from "@/lib/database";

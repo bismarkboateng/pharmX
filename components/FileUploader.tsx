@@ -21,7 +21,6 @@ type Props = {
 }
 
 export default function FileUploader({ pharmacyId }: Props) {
-  console.log(pharmacyId)
   const [loading, setLoading] = useState("")
   const [prescriptionText, setPrescriptionText] = useState("")
   const [prescriptionFile, setPrescriptionFile] = useState<FileList | null>(null)
@@ -53,23 +52,38 @@ export default function FileUploader({ pharmacyId }: Props) {
 
     try {
         setLoading("loading")
-        const file = await uploadImageToFirebase("prescription", fileToUpload)
+        // const file = await uploadImageToFirebase("prescription", fileToUpload)
 
         // EXTRACT TEXT FROM PDF
         const formData = new FormData()
         formData.append("pdfFile", fileToUpload)
         const { data } = await axios.post(EXTRACT_TEXT_ENDPOINT, formData)
+        const actualText = data 
 
-        // INTEGRATE GPT-3 TO GET LIST OF MEDICINES
-        // const medicines = await axios.post("/end-point", data)
+        // checking file validity
+        const regex = /pharm-x-[A-Za-z0-9]{8}/g
+        const matches = data.match(regex)
 
-        // SEARCH through the pharmacy db for the drug info
-        const arrayOfDrugs = data.trim().split("\n")
-        const drugs = JSON.parse(await searchDrugsWithText(arrayOfDrugs) as string) as DrugsFromDBType
-
-        setDrugsFromDb(drugs)
-        setLoading("done")
-        toast.success("file uploaded successfully!")
+        if (matches) {
+          // call a route handler with the match passed as a param
+          const { data } = await axios.get(`http://localhost:3000/api/check-file?match=${matches}`)
+          if (typeof data === "boolean") {
+            const arrayOfDrugs = actualText.trim().split("\n")
+            const drugs = JSON.parse(await searchDrugsWithText(arrayOfDrugs) as string) as DrugsFromDBType
+    
+            setDrugsFromDb(drugs)
+            setLoading("done")
+            toast.success("file uploaded successfully!")
+          } else {
+            toast.error("file invalid")
+            setLoading("")
+            return
+          }
+        } else {
+          toast.error("file is not valid")
+          setLoading("")
+          return
+        }
     } catch (error) {
         console.error(error)
         toast.error("something unexpected happened, please try again")
