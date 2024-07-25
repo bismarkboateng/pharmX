@@ -66,7 +66,7 @@ export default function FileUploader({ pharmacyId }: Props) {
 
         if (matches) {
           // call a route handler with the match passed as a param
-          const { data } = await axios.get(`http://localhost:3000/api/check-file?match=${matches}`)
+          const { data } = await axios.get(`https://pharm-x.vercel.app/api/check-file?match=${matches}`)
           if (typeof data === "boolean") {
             const arrayOfDrugs = actualText.trim().split("\n")
             const drugs = JSON.parse(await searchDrugsWithText(arrayOfDrugs) as string) as DrugsFromDBType
