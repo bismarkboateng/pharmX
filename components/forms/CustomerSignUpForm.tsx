@@ -22,7 +22,6 @@ import "react-phone-number-input/style.css"
 import PhoneInput from "react-phone-number-input"
 import { FaLocationDot } from "react-icons/fa6";
 import toast from "react-hot-toast"
-import { WELCOME_EMAIL_ENDPOINT } from "@/lib/api-config"
 import axios from "axios"
 
 
@@ -66,7 +65,6 @@ export default function CustomerSignUpForm() {
      setLoading("loading")
      await createUserWithEmailAndPassword(auth, formData.email, formData.password)
      const customer = JSON.parse((await createUser(formData)) as string) as CustomerResponse
-    //  await axios.post(WELCOME_EMAIL_ENDPOINT, { userEmail: formData.email, name: formData.name})
      setLoading("done")
      toast.success("account created!")
      router.push("/accounts/sign-in")
