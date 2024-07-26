@@ -13,7 +13,7 @@ import { getUserId } from "@/lib/actions/customer.actions";
 import { FaDatabase } from "react-icons/fa6";
 import Drugs from "./Drugs";
 import { setPharmacyId } from "@/lib/actions/pharmacy.actions";
-import { EXTRACT_TEXT_ENDPOINT } from "@/lib/api-config";
+import { APP_ENDPOINT, EXTRACT_TEXT_ENDPOINT } from "@/lib/api-config";
 
 
 type Props = {
@@ -52,7 +52,7 @@ export default function FileUploader({ pharmacyId }: Props) {
 
     try {
         setLoading("loading")
-        // const file = await uploadImageToFirebase("prescription", fileToUpload)
+        const file = await uploadImageToFirebase("prescription", fileToUpload)
 
         // EXTRACT TEXT FROM PDF
         const formData = new FormData()
@@ -66,7 +66,7 @@ export default function FileUploader({ pharmacyId }: Props) {
 
         if (matches) {
           // call a route handler with the match passed as a param
-          const { data } = await axios.get(`https://pharm-x.vercel.app/api/check-file?match=${matches}`)
+          const { data } = await axios.get(`${APP_ENDPOINT}/api/check-file?match=${matches}`)
           if (typeof data === "boolean") {
             const arrayOfDrugs = actualText.trim().split("\n")
             const drugs = JSON.parse(await searchDrugsWithText(arrayOfDrugs) as string) as DrugsFromDBType
