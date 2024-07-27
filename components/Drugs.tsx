@@ -7,8 +7,8 @@ type Props = {
 
 export default function Drugs({ drugsInfo }: Props) {
   return (
-    <section className="ml-7 mt-5">
-      <h1>Drugs found!</h1>
+    <section className="mt-5">
+      <div>{ drugsInfo.drugs[0] ? <h1>Drugs found!</h1> : <h1>Sorry, couldn&apos;t find any matching drugs</h1>}</div>
       <section className="mt-3 grid grid-cols-2 gap-2">
         {drugsInfo.drugs?.map(drug => (
           <div key={drug._id} className="w-full max-w-sm bg-white border border-gray-200 rounded shadow

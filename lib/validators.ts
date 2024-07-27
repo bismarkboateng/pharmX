@@ -77,3 +77,15 @@ export const billingFormSchema = z.object({
      .min(2, "must be at least 2 characters")
      .max(50, "must be less than 50 characters")
 })
+
+export const preProcessText = (text: any) => {
+    let pre_process_text: any
+    pre_process_text = text.toLowerCase();
+    pre_process_text = pre_process_text.replace(/[^a-z0-9\s]/g, '');
+
+    return pre_process_text
+}
+
+export const tokenizeText = (text: any) => {
+    return text.split(" ")
+}

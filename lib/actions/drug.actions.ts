@@ -18,10 +18,6 @@ type CreateDrugParams = {
     expiry_date: string;
 }
 
-type SearchDrugsWithTextParams = {
-    data: string[]
-}
-
 export const addDrug = async (data: CreateDrugParams, pathname: string, pharmacyId: string) => {
     try {
         await connectToDatabase()
@@ -61,11 +57,14 @@ export const getDrugsBasedOnPharmacyId = async (pharmacyId: string) => {
 }
 
 
-export const searchDrugsWithText = async (data: SearchDrugsWithTextParams) => {
+export const searchDrugsWithText = async (tokens: any) => {
     try {
         await connectToDatabase()
 
-        const drugs = await Drug.find({ name: { $in: data }})
+        const regexTokens = tokens.map((token: any) => new RegExp(token, 'i'));
+        const query = { name: { $in: regexTokens } };
+
+        const drugs = await Drug.find(query)
 
         if (!drugs) {
             return JSON.stringify({ error: "drugs not found"})

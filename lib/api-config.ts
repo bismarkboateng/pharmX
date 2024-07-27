@@ -1,2 +1,2 @@
-export const EXTRACT_TEXT_ENDPOINT = "https://pharm-x-backend.onrender.com/api/extract-text"
-export const APP_ENDPOINT = "https://pharm-x.vercel.app"
+export const EXTRACT_TEXT_ENDPOINT = "http://localhost:4000/api/extract-text"
+export const APP_ENDPOINT = "http://localhost:3000"

@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
   
   const { pathname } = url
   
-  const { data } = await axios.get(`https://pharm-x.vercel.app/api?userId=${userId}`)
+  const { data } = await axios.get(`http://localhost:3000/api?userId=${userId}`)
 
   const user = data
   // user =  { role: role, id: id }
