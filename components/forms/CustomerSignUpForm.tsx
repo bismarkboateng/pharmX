@@ -23,6 +23,9 @@ import PhoneInput from "react-phone-number-input"
 import { FaLocationDot } from "react-icons/fa6";
 import toast from "react-hot-toast"
 import axios from "axios"
+import { FiUser } from "react-icons/fi";
+import { MdEmail } from "react-icons/md";
+
 
 
 
@@ -86,16 +89,10 @@ export default function CustomerSignUpForm() {
          <FormItem>
           <FormLabel>Full name</FormLabel>
           <FormControl>
-            <div className="flex border border-dark-500 bg-dark-400 rounded">
-             <Image
-              src="/assets/icons/user.svg"
-              alt="user"
-              width={24}
-              height={24}
-              className="ml-2"
-             />
+            <div className="flex items-center pl-2 border border-[#ccc] bg-input-bg rounded">
+             <FiUser fontSize={23} className="text-gray-500" />
              <Input
-              className="border-0 placeholder:text-dark-600 "
+              className="border-0 placeholder:text-gray-1"
               placeholder="John Doe"
               {...field}
              />
@@ -112,16 +109,10 @@ export default function CustomerSignUpForm() {
           <FormItem>
             <FormLabel className="">Email</FormLabel>
             <FormControl>
-             <div className="flex border border-dark-500 bg-dark-400 rounded">
-              <Image
-               src="/assets/icons/email.svg"
-               alt="user"
-               width={24}
-               height={24}
-               className="ml-2"
-              />
+             <div className="flex items-center pl-2 border border-[#ccc] bg-input-bg rounded">
+              <MdEmail fontSize={23} className="text-gray-500" />
               <Input
-               className="border-0 placeholder:text-dark-600 "
+               className="border-0 placeholder:text-gray-1"
                placeholder="John Doe"
                {...field}
                />
@@ -141,10 +132,10 @@ export default function CustomerSignUpForm() {
          <FormItem>
           <FormLabel>Address</FormLabel>
           <FormControl>
-            <div className="flex items-center border border-dark-500 bg-dark-400 rounded">
-             <FaAddressBook fontSize={23} className="text-gray-500 ml-2"/>
+           <div className="flex items-center pl-2 border border-[#ccc] bg-input-bg rounded">
+            <FaAddressBook fontSize={23} className="text-gray-500 ml-2"/>
              <Input
-              className="border-0 placeholder:text-dark-600 "
+              className="border-0 placeholder:text-gray-1"
               placeholder="P.O.Box ..."
               {...field}
              />
@@ -167,8 +158,8 @@ export default function CustomerSignUpForm() {
                withCountryCallingCode
                value={field.value as string}
                onChange={field.onChange}
-               className="mt-2 h-[42px] rounded px-3 text-sm border bg-dark-400
-               placeholder:text-dark-600 border-dark-500"
+               className="mt-2 h-[42px] rounded px-3 text-sm border border-[#ccc] bg-dark-400 bg-input-bg
+               placeholder:text-gray-1 border-dark-500 outline-none"
               />
             </FormControl>
            <FormMessage className="text-red-400"/>
@@ -185,9 +176,9 @@ export default function CustomerSignUpForm() {
          <FormItem>
           <FormLabel>Age</FormLabel>
           <FormControl>
-            <div className="flex items-center border border-dark-500 bg-dark-400 rounded">
-             <Input
-              className="border-0 placeholder:text-dark-600 "
+           <div className="flex items-center pl-2 border border-[#ccc] bg-input-bg rounded">
+            <Input
+              className="border-0 placeholder:text-gray-1 "
               placeholder="18+"
               {...field}
              />
@@ -204,10 +195,10 @@ export default function CustomerSignUpForm() {
           <FormItem>
             <FormLabel>Location</FormLabel>
             <FormControl>
-             <div className="flex items-center border border-dark-500 bg-dark-400 rounded">
+             <div className="flex items-center pl-2 border border-[#ccc] bg-input-bg rounded">
               <FaLocationDot fontSize={23} className="ml-2 text-gray-500" />
               <Input
-               className="border-0 placeholder:text-dark-600 "
+               className="border-0 placeholder:text-gray-1 "
                placeholder="Ayeduase"
                {...field}
                />
@@ -226,9 +217,9 @@ export default function CustomerSignUpForm() {
          <FormItem>
           <FormLabel>National id <span className="text-xs text-gray-500">**ghana card</span></FormLabel>
           <FormControl>
-            <div className="flex items-center border border-dark-500 bg-dark-400 rounded">
+            <div className="flex items-center pl-2 border border-[#ccc] bg-input-bg rounded">
              <Input
-              className="border-0 placeholder:text-dark-600 "
+              className="border-0 placeholder:text-gray-100"
               placeholder="GHA-"
               {...field}
              />
@@ -241,23 +232,23 @@ export default function CustomerSignUpForm() {
 
         <div>
          <label className="mb-2 block text-sm">Password</label>
-         <div className="w-full placeholder:text-gray-500 outline-none pl-3 py-2
-           rounded border border-dark-500 bg-dark-400 flex ">
+         <div className="w-full placeholder:text-gray-100 outline-none pl-3 py-2
+           rounded border border-[#ccc]bg-input-bg bg-input-bg flex ">
           <MdOutlineKey fontSize={23} className="text-gray-500" />
           <input
            type="password"
            name="password"
            value={password}
            onChange={event => setPassword(event.target.value)}
-           className="border-0 outline-0 bg-dark-400 ml-3"
+           className="border-0 outline-0 bg-input-bg ml-3"
            placeholder="****"
           />
          </div>
         </div>
         <Button
          type="submit"
-         className="bg-blue-600 text-white w-full hover:bg-blue-600
-         active:bg-blue-600 inactive:bg-blue-600 cursor-pointer rounded"
+         className="bg-blue text-white w-full hover:bg-blue
+         active:bg-blue inactive:bg-blue cursor-pointer rounded"
          disabled={loading === "loading"}
         >
           {loading === "loading" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -269,10 +260,10 @@ export default function CustomerSignUpForm() {
       <div className="flex items-center justify-between">
        <p className="mt-3">
         Already have an account? <Link href="/accounts/sign-in"
-        className="text-blue-600 underline">sign in</Link>
+        className="text-gray-1 underline">sign in</Link>
        </p>
-       {/* REDESIGN sign in part */}
-       <Link href="/join-us/register-your-pharmacy" className="mt-3 text-blue-600 text-xs underline">
+
+       <Link href="/join-us/register-your-pharmacy" className="mt-3 text-gray-1 text-xs underline">
         Register your pharmacy
        </Link>
       </div>

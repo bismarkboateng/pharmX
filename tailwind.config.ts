@@ -19,26 +19,15 @@ const config = {
     },
     extend: {
       colors: {
-        green: {
-          500: "#24AE7C",
-          600: "#0D2A1F",
-        },
-        red: {
-          500: "#F37877",
-          600: "#3E1716",
-          700: "#F24E43",
-        },
-        light: {
-          200: "#E8E9E9",
-        },
-        dark: {
-          200: "#0D0F10",
-          300: "#131619",
-          400: "#1A1D21",
-          500: "#363A3D",
-          600: "#76828D",
-          700: "#ABB8C4",
-        },
+        blue: "#042085",
+        "blue-100": "#7091E6",
+        white: "#fff",
+        black: "#000000",
+        green: "#3da635",
+        "gray-2": "#808080",
+        "gray-1": "#505451",
+        "input-bg": "#F0F0F0",
+        yellow: "#faa81b",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

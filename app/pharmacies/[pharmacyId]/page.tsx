@@ -19,7 +19,7 @@ export default async function PharmacyDetail({ params }: Props) {
           <h1 className="text-2xl font-bold mb-2">
             {pharmacy.pharmacy?.name}
           </h1>
-          <article className="mt-5 text-gray-500 line-clamp-6">
+          <article className="mt-5 line-clamp-[10] lg:line-clamp-none text-gray-500 text-sm">
            {pharmacy.pharmacy?.description}
           </article>
           <div className="flex items-center justify-between gap-1 mt-5">

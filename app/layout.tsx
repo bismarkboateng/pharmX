@@ -21,11 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} bg-dark-300 relative`}>
+      <body className={`${roboto.className} bg-dark/10 relative`}>
        <main>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="white"
         >
             {children}
         </ThemeProvider>

@@ -22,7 +22,7 @@ export default async function AllDrugs({ params }: Props) {
   const userId = await getUserId()
   const pharmacy = JSON.parse((await getPharmacy(userId!) as string)) as Pharmacy
 
-  const drugs = await getDrugsBasedOnPharmacyId(pharmacy.pharmacy._id!)
+  const drugs = await getDrugsBasedOnPharmacyId(pharmacy?.pharmacy?._id!)
   const parsedDrugs = JSON.parse(drugs!)
 
 
@@ -83,7 +83,6 @@ export default async function AllDrugs({ params }: Props) {
              </Tooltip>
             </TooltipProvider>
           </TableCell>
-          {/* THIS SHOULD BE CHANGED */}
           <TableCell>{`${expiryDate} months`}</TableCell>
          </TableRow>
         )

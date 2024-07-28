@@ -113,22 +113,23 @@ export const getPharmaciesBasedOnUserLocation = async (userId: string) => {
     }
 }
 
-export const getOtherPharmacies = async (location: string) => {
+export const getOtherPharmacies = async (userId: string) => {
     try {
         await connectToDatabase()
+        const customer = await Customer.findOne({ user: userId })
 
         // handling null / undefined cases 
-        const query = location ? { location: { $ne: location }} : {}
+        const query = customer.location ? { location: { $ne: customer.location }} : {}
         const pharmacies = await Pharmacy.find(query)
         if (!pharmacies) {
             return JSON.stringify({ msg: "could not find any pharmacy"})
         }
-        return JSON.stringify({ msg: "fetched pharmacies", pharmacies })
+        return JSON.stringify({ msg: "OK", pharmacies })
     } catch (error) {
-        return JSON.stringify({
-            msg: "error fetching pharmacies",
-            error
-        })
+      return JSON.stringify({
+        msg: "error fetching data",
+        error
+      })
     }
 }
 

@@ -12,24 +12,26 @@ export default function Home() {
       <section className="flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/assets/icons/logo-full.png"
+            src="/assets/icons/logo.png"
             alt="logo"
             width={24}
             height={24}
             className="rounded-full"
           />
-          <p className="text-white font-bold">Pharm X</p>
+          <p className="font-bold">pharm X</p>
         </Link>
         <div>
-          <Link href="/accounts/sign-in" className="bg-blue-600 hover:bg-blue-500 transition-all duration-500 
-       active:bg-blue-600 px-5 py-3 rounded cursor-pointer">
-            Order drug
+         <Link
+           href="/accounts/sign-in"
+           className="bg-[#043CAA] transition-all duration-500 px-5 py-3 rounded cursor-pointer text-white">
+            Sign in
           </Link>
         </div>
       </section>
 
+
       <section className="mt-10 mb-32">
-        <h1 className="text-lg leading-5 md:text-4xl w-full md:w-[80%] font-bold text-center
+        <h1 className="text-gray-800 text-lg leading-5 md:text-4xl w-full md:w-[80%] font-bold text-center
       mx-auto md:leading-[80px]">
           <TypeAnimation
             sequence={[
@@ -57,24 +59,33 @@ export default function Home() {
         </p>
       </section>
 
+      <section>
+        <h1 className="text-[#043CAA] text-center text-xl font-bold">Our Affiliations</h1>
+        <div className="flex items-center justify-center gap-20 mt-10 ">
+          <Image src="/assets/aff1.png" width={50} height={50} alt="aff1" />
+          <Image src="/assets/aff2.png" width={50} height={50} alt="aff1" />
+          <Image src="/assets/aff3.png" width={30} height={30} alt="aff1" />
+        </div>
+      </section>
+
       <section className="flex flex-col lg:flex-row items-center gap-20 mt-32">
         <section className="w-full lg:w-[50%]">
           <h2 className="text-2xl font-bold mb-4">Order Drugs Based on Prescription</h2>
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-500 mb-6">
             Easily order your medications based on your prescription.
             Our user-friendly platform makes it simple to manage your healthcare needs.
           </p>
           <Link
             href="/accounts/sign-in"
-            className="bg-blue-600 hover:bg-blue-500 active:bg-blue-600
-        px-5 py-3 rounded cursor-pointer"
+            className="bg-[#043CAA] hover:bg-blue active:bg-blue px-5 py-3
+            rounded cursor-pointer text-white"
           >
             Order now
           </Link>
         </section>
         <section className="w-full lg:w-[50%]">
           <Image
-            src="/assets/prescription-file.png"
+            src="/assets/prescription-file-1.png"
             alt="prescription file"
             width={500}
             height={200}
@@ -87,7 +98,7 @@ export default function Home() {
       <section className="w-full flex flex-col lg:flex-row items-center gap-20 md:mt-20 lg:mt-32">
         <section className="w-full lg:w-[50%]">
           <Image
-            src="/assets/pharmacy-finder.png"
+            src="/assets/pharmacy-finder1.png"
             alt="pharmacy finder"
             width={500}
             height={200}
@@ -97,14 +108,14 @@ export default function Home() {
         </section>
         <section className="w-full lg:w-[50%]">
           <h2 className="text-2xl font-bold mb-4">Pharmacy Finder</h2>
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-500 mb-6">
             Easily locate the nearest pharmacy to your location. Our comprehensive directory ensures you can
             access the healthcare services you need.
           </p>
           <Link
             href="/accounts/sign-in"
-            className="bg-blue-600 hover:bg-blue-500 active:bg-blue-600
-        px-5 py-3 rounded cursor-pointer"
+            className="bg-[#043CAA] hover:bg-blue active:bg-blue px-5 py-3
+            rounded cursor-pointer text-white"
           >
             Find a pharmacy
           </Link>

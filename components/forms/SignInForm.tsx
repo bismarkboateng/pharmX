@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import Image from "next/image"
 import { MdOutlineKey } from "react-icons/md"
+import { MdEmail } from "react-icons/md";
+
 
 
 export default function SignInForm() {
@@ -80,18 +82,12 @@ export default function SignInForm() {
        name="email"
        render={({ field }) => (
         <FormItem>
-          <FormLabel className="">Email</FormLabel>
+          <FormLabel className="text-gray-1">Email</FormLabel>
           <FormControl>
-            <div className="flex border border-dark-500 bg-dark-400 rounded">
-            <Image
-             src="/assets/icons/email.svg"
-             alt="user"
-             width={24}
-             height={24}
-             className="ml-2"
-            />
+            <div className="pl-3 flex items-center border border-[#ccc] bg-input-bg rounded">
+            <MdEmail fontSize={23} className="text-gray-500" />
             <Input
-             className="border-0 placeholder:text-dark-600"
+             className="border-0 placeholder:text-gray-1 "
              placeholder="johndoe@gmail.com"
              {...field}
             />
@@ -104,23 +100,23 @@ export default function SignInForm() {
 
         <div>
          <label className="mb-2 block text-sm">Password</label>
-         <div className=" placeholder:text-gray-500 outline-none pl-3 py-2
-           rounded border border-dark-500 bg-dark-400 flex ">
+         <div className=" placeholder:text-gray-1 outline-none pl-3 py-2
+           rounded border border-[#ccc] flex  bg-input-bg">
           <MdOutlineKey fontSize={23} className="text-gray-500" />
           <input
            type="password"
            name="password"
            value={password}
            onChange={event => setPassword(event.target.value)}
-           className="border-0 outline-0 bg-dark-400 ml-3 w-full"
+           className="border-0 outline-0 bg-dark-400 ml-3 w-full  bg-input-bg"
           />
          </div>
         </div>
 
         <Button
          type="submit"
-         className="bg-blue-600 text-white w-full rounded hover:bg-blue-600
-         active:bg-blue-600 inactive:bg-blue-600 cursor-pointer"
+         className="bg-blue text-white w-full rounded hover:bg-blue
+         active:bg-blue inactive:bg-blue cursor-pointer"
          disabled={loading === "loading"}
         >
           {loading === "loading" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -128,9 +124,9 @@ export default function SignInForm() {
         </Button>
         {user && <p className="text-red-500 text-center">{user}</p>}
       </form>
-      <p className="mt-3">
+      <p className="mt-3 text-gray-1">
        New here? <Link href="/accounts/sign-up"
-       className="text-blue-600 underline">sign up</Link>
+       className="text-gray-1 underline">sign up</Link>
       </p>
      </Form>
     </section>

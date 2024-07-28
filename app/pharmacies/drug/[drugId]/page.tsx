@@ -26,7 +26,7 @@ export default function DrugDetail({ params }: Props) {
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start mt-20">
-     <div className="w-full max-w-sm bg-white border border-gray-200 rounded shadow
+     <div className="w-[200px] bg-white border border-gray-200 rounded shadow
       dark:bg-gray-800 dark:border-gray-700 cursor-pointer hover:scale-105 transition-all duration-800">
       <Image width={400} height={300} className="p-8 rounded-t-lg" src={drugDetail?.drug.image!} alt="product image" />
       <div className="px-5 pb-5">
@@ -43,7 +43,7 @@ export default function DrugDetail({ params }: Props) {
       </div>
      </div>
 
-     <section className="border border-dark-500 rounded p-2">
+     <section className="border border-dark-500 rounded p-2 shadow">
       <h1 className="text-center font-bold">Billing Information</h1>
       <BillingForm drugId={drugDetail?.drug._id!} />
      </section>

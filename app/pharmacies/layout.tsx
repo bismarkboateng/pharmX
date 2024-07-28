@@ -8,8 +8,8 @@ export default function RootLayout({
 }>) {
   return (
     <section>
+     <Navbar />
      <section className="w-[90%] mx-auto pt-2">
-      <Navbar />
       {children}
      </section>
     </section>

@@ -109,8 +109,10 @@ export default function FileUploader({ pharmacyId }: Props) {
         
         // preprocessing and tokenizing text
         const preProcessed = preProcessText(data)
+        console.log(preProcessed)
         const tokenizedText = tokenizeText(preProcessed)
 
+        console.log(tokenizedText)
         // searching drugs from db 
         const drugs = JSON.parse(await searchDrugsWithText(tokenizedText) as string) as DrugsFromDBType
 
@@ -135,17 +137,19 @@ export default function FileUploader({ pharmacyId }: Props) {
   };
 
   return (
-    <section className="pl-6">
+    <section className="md:pl-6">
       <h1 className="mt-5 text-xl font-bold">Prescription file</h1>
       <section>
         <section className="flex items-center gap-2 mt-5">
-          <div onClick={() => setCapture(true)} className="border border-gray-500 px-5 py-2 rounded flex gap-2 cursor-pointer shadow-md">
-            <FaCamera className="text-blue-600" fontSize={21} />
-            <span>Capture</span>
+          <div onClick={() => setCapture(true)}
+            className="border border-blue px-5 py-2 rounded flex gap-2 cursor-pointer shadow-md">
+            <FaCamera className="text-blue" fontSize={21} />
+            <span className="text-gray-1">Capture</span>
           </div>
-          <div onClick={() => setUpload(true)} className="border border-gray-500 px-5 py-2 rounded flex gap-2 cursor-pointer shadow-md">
-           <MdFileUpload className="text-blue-600" fontSize={23} />
-           <span>Upload</span>
+          <div onClick={() => setUpload(true)}
+            className="border border-blue px-5 py-2 rounded flex gap-2 cursor-pointer shadow-md">
+           <MdFileUpload className="text-blue" fontSize={23} />
+           <span className="text-gray-1">Upload</span>
           </div>
         </section>
 
@@ -162,8 +166,8 @@ export default function FileUploader({ pharmacyId }: Props) {
               videoConstraints={videoConstraints}
             />
             <div className="flex flex-row items-center gap-3">
-             <Button className="bg-blue-600 text-white
-              hover:bg-blue-600 active:bg-blue-600 mt-2 rounded"
+             <Button className="bg-blue text-white
+              hover:bg-blue active:bg-blue mt-2 rounded"
               onClick={handleCapture}>
                Take photo
              </Button>
@@ -198,19 +202,19 @@ export default function FileUploader({ pharmacyId }: Props) {
         {upload && (
           <>
         <div className="grid w-full max-w-sm items-center gap-1.5 mt-0 md:mt-4">
-          <Label htmlFor="prescription_file" className="text-lg font-bold">Prescription file</Label>
           <p className="text-sm italic">upload a prescription file</p>
           <Input
             id="prescription_file"
             type="file"
-            className="border border-dark-500 bg-dark-400 rounded file:text-blue-600"
+            className="border border-[#ccc] bg-input-bg rounded file:text-blue
+            cursor-pointer"
             onChange={(event) => setPrescriptionFile(event.target.files)}
             accept="application/pdf"
           />
         </div>
         <Button
           type="submit"
-          className="w-full md:w-1/2 bg-blue-600 hover:bg-blue-600 active:bg-blue-600 rounded mt-5 text-white"
+          className="w-full md:w-1/2 bg-blue hover:bg-blue active:bg-blue rounded mt-5 text-white"
           disabled={loading === "loading"}
         >
           {loading === "loading" && <Loader2 className="mr-2 w-4 h-4 animate-spin" />}

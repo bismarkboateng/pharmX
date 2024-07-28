@@ -15,12 +15,12 @@ export default async function Registeryourpharmacy() {
     <section className="p-3 md:p-10">
      <Link href="/" className="flex items-center gap-2 mb-5">
       <Image
-        src="/assets/icons/logo-full.png"
+        src="/assets/icons/logo.png"
         alt="pharm x logo"
         width={24}
         height={24}
       />
-      <span className="text-xl font-bold">Pharm X</span>
+      <span className="text-xl font-bold">pharm X</span>
      </Link>
      <RegisterForm />
     </section>

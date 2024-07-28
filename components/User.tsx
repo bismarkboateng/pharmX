@@ -32,12 +32,12 @@ export default function User() {
           <div>
             {pathname === "/pharmacies"
              ? (
-              <FaUserCircle fontSize={25} className="text-blue-500" />
+              <FaUserCircle fontSize={25} className="text-white" />
              )
              : ""}
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-dark-400 border border-dark-500">
+        <DropdownMenuContent className="bg-white border border-dark-500">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <div className="h-[1px] w-full bg-gray-600" />
           <DropdownMenuItem>

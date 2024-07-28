@@ -68,7 +68,7 @@ export default function BillingForm({ drugId }: { drugId: string }) {
                 <FormLabel>Address</FormLabel>
                 <FormControl>
                   <Input
-                   className="border border-dark-500 bg-dark-400"
+                   className="border border-[#ccc] bg-input-bg rounded"
                    placeholder="bomso.." {...field}
                   />
                 </FormControl>
@@ -83,7 +83,7 @@ export default function BillingForm({ drugId }: { drugId: string }) {
                 <FormLabel>Calling contact</FormLabel>
                 <FormControl>
                   <Input
-                   className="border border-dark-500 bg-dark-400"
+                   className="border border-[#ccc] bg-input-bg rounded"
                    placeholder="+233..."{...field}
                   />
                 </FormControl>
@@ -94,8 +94,8 @@ export default function BillingForm({ drugId }: { drugId: string }) {
           <p className="text-xs font-bold italic text-gray-400">**you only pay when you get the product</p>
           <Button
            type="submit"
-           className="bg-blue-600 text-white 
-           hover:bg-blue-600 active:bg-blue-600 rounded w-full cursor-pointer"
+           className="bg-blue text-white 
+           hover:bg-blue active:bg-blue rounded w-full cursor-pointer"
            disabled={loading === "loading"}
           >
             {loading == "loading" && <Loader2 className="w-4 h-4 animate-spin mr-1" />}

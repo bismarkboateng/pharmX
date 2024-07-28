@@ -15,7 +15,7 @@ export default async function Sidebar() {
      <div className="fixed top-5 left-10 z-50 lg:hidden">
       <Menu />
      </div>
-     <section className="hidden lg:block h-screen w-[15%] border-r border-light-4 pl-2 pr-2 shadow">
+     <section className="hidden lg:block h-screen w-[15%] pl-2 pr-2 shadow">
       <div className="text-base font-bold mt-5">{pharmacy.pharmacy?.name}</div>
       <SidebarLinks userId={userId!} />
     </section>

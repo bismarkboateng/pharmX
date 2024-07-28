@@ -19,11 +19,11 @@ export default async function page() {
   const drugs = JSON.parse((await getDrugsBasedOnMultipleIds(drugIds) as string)) as DrugsFromDBType
 
   return (
-    <section>
+    <section className="pl-5 md:pl-10 lg:pl-12 xl:pl-16">
       <h1 className="text-lg font-bold mt-5">Orders</h1>
       <section className="grid grid-cols-1 md:grid-cols-3 mt-5">
         {drugs.drugs.map(drug => (
-          <div key={drug._id} className="w-full max-w-sm bg-white border
+          <div key={drug._id} className="w-[200px] bg-white border
               border-gray-200 rounded shadow dark:bg-gray-800 dark:border-gray-700 cursor-pointer
               hover:scale-105 transition-all duration-800">
               <Image width={400} height={300}  className="p-8 rounded-t-lg" src={drug.image!} alt="product image" />
@@ -37,8 +37,8 @@ export default async function page() {
               <div className="flex items-center mt-2.5 mb-5">
                 {orders.orders.map(order => (
                  <div key={order._id} className="flex flex-col">
-                  <div className="text-green-500 text-sm"><span className="text-white">Order Status:</span> {order.status.toUpperCase()}</div>
-                  <div className="">Ordered On: {moment(order.createdAt).format("DD-MM-YYYY")}</div>
+                  <div className="text-sm"><span className="text-gray-1 text-sm">Order Status:</span> {order.status.toUpperCase()}</div>
+                  <div className="text-sm">Ordered On: {moment(order.createdAt).format("DD-MM-YYYY")}</div>
                  </div>
                 ))}
               </div>

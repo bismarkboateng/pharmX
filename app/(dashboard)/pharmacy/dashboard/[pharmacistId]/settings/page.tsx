@@ -59,7 +59,7 @@ export default function Settings() {
 
 
   return (
-    <section className="p-10 lg:p-0">
+    <section className="p-10 lg:p-0 xl:p-5">
      <h1 className="text-xl font-bold mt-20">Settings</h1>
      <section className="mt-10">
       <Form {...form}>
@@ -72,7 +72,8 @@ export default function Settings() {
             <FormItem>
               <FormLabel>Pharmacy name</FormLabel>
               <FormControl>
-                <Input placeholder="pharmacy-name" className="border border-dark-500 bg-dark-400 rounded" {...field} />
+                <Input placeholder="pharmacy-name"
+                className="border border-[#ccc] bg-input-bg rounded" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -85,7 +86,8 @@ export default function Settings() {
             <FormItem>
               <FormLabel>Location</FormLabel>
               <FormControl>
-                <Input className="border border-dark-500 bg-dark-400 rounded" placeholder="Location" {...field} />
+                <Input
+                 className="border border-[#ccc] bg-input-bg rounded" placeholder="Location" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -101,7 +103,8 @@ export default function Settings() {
             <FormItem>
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Input className="border border-dark-500 bg-dark-400 rounded" placeholder="address" {...field} />
+                <Input
+                 className="border border-[#ccc] bg-input-bg rounded" placeholder="address" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -114,7 +117,8 @@ export default function Settings() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input className="border border-dark-500 bg-dark-400 rounded" placeholder="johndoe@gmail.com" {...field} />
+                <Input
+                 className="border border-[#ccc] bg-input-bg rounded" placeholder="johndoe@gmail.com" {...field} />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
@@ -123,8 +127,8 @@ export default function Settings() {
         </div>
         <Button
          type="submit"
-         className="bg-blue-600 text-white rounded
-         px-20 hover:bg-blue-600 active:bg-blue-600"
+         className="bg-blue text-white rounded
+         px-20 hover:bg-blue active:bg-blue"
          disabled={loading === "loading"}
         >
           {loading === "loading" && <Loader2 className="w-4 h-4 mr-1 animate-spin" />}

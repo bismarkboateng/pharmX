@@ -39,7 +39,7 @@ export const registerPharmacySchema = z.object({
     .max(100, "must be less than 100 characters"),
     pharmacy_email: z.string().email("invalid email address"),
     description: z.string().min(2, "must be at least 2 characters")
-    .max(400, "must be less than 400 characters"),
+    .max(500, "must be less than 400 characters"),
 })
 
 

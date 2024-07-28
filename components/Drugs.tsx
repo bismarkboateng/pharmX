@@ -11,7 +11,7 @@ export default function Drugs({ drugsInfo }: Props) {
       <div>{ drugsInfo.drugs[0] ? <h1>Drugs found!</h1> : <h1>Sorry, couldn&apos;t find any matching drugs</h1>}</div>
       <section className="mt-3 grid grid-cols-2 gap-2">
         {drugsInfo.drugs?.map(drug => (
-          <div key={drug._id} className="w-full max-w-sm bg-white border border-gray-200 rounded shadow
+          <div key={drug._id} className="w-[200px] bg-white border border-gray-200 rounded shadow
         dark:bg-gray-800 dark:border-gray-700 cursor-pointer hover:scale-105 transition-all duration-800">
             <Link href={`/pharmacies/drug/${drug._id}`}>
               <Image width={400} height={300} className="p-8 rounded-t-lg" src={drug.image!} alt="product image" />

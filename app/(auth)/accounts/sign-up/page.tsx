@@ -9,12 +9,12 @@ export default function Signup() {
       <section className="w-full p-5 md:p-10 lg:w-[50%] lg:p-10 2xl:p-24">
        <div className="flex items-center gap-2 mb-5">
         <Image
-         src="/assets/icons/logo-full.png"
+         src="/assets/icons/logo.png"
          alt="pharm x logo"
          width={24}
          height={24}
         />
-        <span className="text-xl font-bold">Pharm X</span>
+        <span className="text-xl font-bold">pharm X</span>
        </div>
        <h1 className="text-2xl font-bold mb-5">Create an account with us.</h1>
        <CustomerSignUpForm />

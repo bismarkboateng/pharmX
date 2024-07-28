@@ -97,7 +97,7 @@ export default function RegisterForm() {
                 <FormLabel>Full name</FormLabel>
                 <FormControl>
                 <Input placeholder="name" {...field}
-                className="border border-dark-500 bg-dark-400 rounded" />
+                className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded" />
                 </FormControl>
                 <FormMessage className="text-red-500" />
               </FormItem>
@@ -110,7 +110,7 @@ export default function RegisterForm() {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                 <Input placeholder="johndoe@gmail.com" {...field}
-                  className="border border-dark-500 bg-dark-400 rounded" />
+                  className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded" />
                 </FormControl>
                 <FormMessage className="text-red-500" />
               </FormItem>
@@ -127,7 +127,7 @@ export default function RegisterForm() {
                 <FormLabel>License</FormLabel>
                 <FormControl>
                 <Input placeholder="****" {...field}
-                  className="border border-dark-500 bg-dark-400 rounded"/>
+                  className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded" />
                 </FormControl>
                 <FormMessage className="text-red-500" />
               </FormItem>
@@ -140,7 +140,7 @@ export default function RegisterForm() {
               <FormLabel>Year&apos;s of experience</FormLabel>
                 <FormControl>
                 <Input placeholder="3+" {...field}
-                  className="border border-dark-500 bg-dark-400 rounded" />
+                  className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded" />
                 </FormControl>
                 <FormMessage className="text-red-500" />
               </FormItem>
@@ -155,7 +155,7 @@ export default function RegisterForm() {
                 <FormLabel>Phone number</FormLabel>
                 <FormControl>
                 <Input placeholder="+233 *** *** ****" {...field}
-                  className="border border-dark-500 bg-dark-400 rounded" />
+                  className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded" />
                 </FormControl>
                 <FormMessage className="text-red-500" />
               </FormItem>
@@ -168,7 +168,7 @@ export default function RegisterForm() {
                 <FormLabel>Address</FormLabel>
                 <FormControl>
                 <Input placeholder="P.O..." {...field}
-                  className="border border-dark-500 bg-dark-400 rounded"
+                  className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded"
                 />
                 </FormControl>
                 <FormMessage className="text-red-500" />
@@ -177,14 +177,14 @@ export default function RegisterForm() {
 
           <div>
           <label className="mb-2 block text-sm">Password</label>
-            <div className="w-full placeholder:text-gray-500 outline-none pl-3 py-2
-            rounded border border-dark-500 bg-dark-400 flex ">
+            <div className="w-full placeholder:text-gray-1 outline-none pl-3 py-2
+            rounded border border-[#ccc] bg-input-bg flex ">
             <input
               type="password"
               name="password"
               value={password}
               onChange={event => setPassword(event.target.value)}
-              className="border-0 outline-0 bg-dark-400 ml-3"
+              className="border-0 outline-0 bg-input-bg ml-3"
               placeholder="****"
             />
             </div>
@@ -203,7 +203,7 @@ export default function RegisterForm() {
                   <FormLabel>Pharmacy Name</FormLabel>
                   <FormControl className="">
                     <Input placeholder="name" {...field}
-                    className="border border-dark-500 bg-dark-400 rounded"
+                     className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded"
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />
@@ -218,7 +218,7 @@ export default function RegisterForm() {
                   <FormLabel>Location</FormLabel>
                   <FormControl>
                     <Input placeholder="bomso" {...field}
-                    className="border border-dark-500 bg-dark-400 rounded"
+                     className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded"
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />
@@ -236,7 +236,7 @@ export default function RegisterForm() {
                   <FormLabel>Working hours</FormLabel>
                   <FormControl>
                     <Input placeholder="8am-8pm" {...field}
-                    className="border border-dark-500 bg-dark-400 rounded"
+                     className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded"
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />
@@ -251,7 +251,7 @@ export default function RegisterForm() {
                   <FormLabel>Address</FormLabel>
                   <FormControl>
                     <Input placeholder="P.O.Box Am 328" {...field}
-                    className="border border-dark-500 bg-dark-400 rounded"
+                     className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded"
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />
@@ -267,7 +267,7 @@ export default function RegisterForm() {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input placeholder="johndoe@gmail.com" {...field}
-                    className="border border-dark-500 bg-dark-400 rounded"
+                     className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded"
                     />
                   </FormControl>
                   <FormMessage className="text-red-500" />
@@ -283,7 +283,7 @@ export default function RegisterForm() {
                   <FormControl>
                   <Textarea
                     placeholder="pharmacy description" {...field}
-                    className="border border-dark-500 bg-dark-400 rounded"
+                    className="border border-[#ccc] bg-input-bg placeholder:text-gray-1 rounded"
                   />
                   </FormControl>
                   <FormMessage className="text-red-500" />
@@ -295,8 +295,8 @@ export default function RegisterForm() {
 
         <Button
           type="submit"
-          className="bg-blue-600 text-white w-full md:w-[20%] rounded cursor-pointer
-          active:bg-blue-600 hover:bg-blue-600"
+          className="bg-blue text-white w-full md:w-[20%] rounded cursor-pointer
+          active:bg-blue hover:bg-blue"
           disabled={loading === "loading"}
         >
           {loading === "loading" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

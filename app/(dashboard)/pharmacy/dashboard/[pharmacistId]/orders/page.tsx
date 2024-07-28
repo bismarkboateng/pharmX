@@ -46,8 +46,8 @@ export default function OrdersPage() {
 
   return (
     <section className="p-9 lg:p-0">
-      <h1 className="text-xl font-bold mt-20">Orders</h1>
-      <section className="mt-10">
+      <h1 className="text-xl font-bold mt-20 lg:pl-5">Orders</h1>
+      <section className="mt-10 2xl:mt-5">
         <Table>
           <TableHeader>
             <TableRow>
@@ -91,5 +91,3 @@ export default function OrdersPage() {
     </section>
   )
 }
-
-// Customer(name) Drug(name) Price Status(pending | processing | delivered )

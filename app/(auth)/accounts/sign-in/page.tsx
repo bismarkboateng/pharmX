@@ -8,12 +8,12 @@ export default function Signin() {
      <section className="w-full md:w-[50%] md:p-5 lg:p-10 xl:p-16 2xl:p-24">
       <div className="flex items-center gap-2 mb-5">
       <Image
-       src="/assets/icons/logo-full.png"
+       src="/assets/icons/logo.png"
        alt="pharm x logo"
        width={24}
        height={24}
       />
-      <span className="text-xl font-bold">Pharm X</span>
+      <span className="text-xl font-bold">pharm X</span>
       </div>
       <h1 className="text-2xl font-bold mb-5">Sign in</h1>
       <SignInForm />
