@@ -89,3 +89,30 @@ export const preProcessText = (text: any) => {
 export const tokenizeText = (text: any) => {
     return text.split(" ")
 }
+
+export const formatMedicationText = (text: any) => {
+    // Split the text by commas to handle multiple entries
+    const entries = text.split(',');
+
+    // Use a regular expression to extract medication names
+    const medicationNames = entries.map((entry: any) => {
+        // This regex captures word characters and spaces, discarding anything else
+        const match = entry.match(/[A-Za-z\s]+/);
+        return match ? match[0].trim() : '';
+    });
+
+    // Filter out any empty strings
+    return medicationNames.filter((name: any) => name.length > 0);
+}
+
+export const getMedicine = (medicines: any) => {
+    return medicines.map((text: any) => {
+        // Split the text by newline
+        const lines = text.split('\n');
+        
+        // Get the last part which should be the medication name
+        const medicationName = lines.pop().trim();
+        
+        return medicationName;
+    });
+}

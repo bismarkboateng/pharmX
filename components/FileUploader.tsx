@@ -6,21 +6,21 @@ import { FormEvent, useState, useRef, useCallback, useEffect, use } from "react"
 import { Button } from "./ui/button";
 import toast from "react-hot-toast";
 import { uploadImageToFirebase } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { Loader2, Loader2Icon } from "lucide-react";
 import axios from "axios"
 import { searchDrugsWithText } from "@/lib/actions/drug.actions";
 import { getUserId } from "@/lib/actions/customer.actions";
 import { FaDatabase } from "react-icons/fa6";
 import Drugs from "./Drugs";
 import { setPharmacyId } from "@/lib/actions/pharmacy.actions";
-import { APP_ENDPOINT, EXTRACT_TEXT_ENDPOINT } from "@/lib/api-config";
+import { APP_ENDPOINT, EXTRACT_TEXT_ENDPOINT, GET_MEDICINE_ENDPOINT } from "@/lib/api-config";
 import Webcam from "react-webcam"
 import Image from "next/image";
 import { createWorker } from "tesseract.js"
 import { MdOutlineImageSearch } from "react-icons/md";
 import { FaCamera } from "react-icons/fa";
 import { MdFileUpload } from "react-icons/md";
-import { preProcessText, tokenizeText } from "@/lib/validators";
+import { formatMedicationText, getMedicine, preProcessText, tokenizeText } from "@/lib/validators";
 import { MdOutlineCameraswitch } from "react-icons/md";
 
 
@@ -105,16 +105,19 @@ export default function FileUploader({ pharmacyId }: Props) {
         const imageSrc = webcamRef.current?.getScreenshot();
         const worker = await createWorker('eng');
         const ret = await worker.recognize(imageSrc!);
-        const data: any = ret.data.text 
-        
-        // preprocessing and tokenizing text
-        const preProcessed = preProcessText(data)
-        console.log(preProcessed)
-        const tokenizedText = tokenizeText(preProcessed)
+        const extractedTextFromImage: any = ret.data.text 
 
-        console.log(tokenizedText)
+
+        const medicines = formatMedicationText(extractedTextFromImage)
+        const med = getMedicine(medicines)
+        // medicines.push(medicines)
+        
+        // extracted text feed into an LLM
+        // const { data } = await axios.post(GET_MEDICINE_ENDPOINT, { content: extractedTextFromImage })
+
         // searching drugs from db 
-        const drugs = JSON.parse(await searchDrugsWithText(tokenizedText) as string) as DrugsFromDBType
+        const drugs = JSON.parse(await searchDrugsWithText(med) as string) as DrugsFromDBType
+
 
         setDrugsFromDb(drugs)
         setResultTextFromImage(ret.data.text)
@@ -127,6 +130,7 @@ export default function FileUploader({ pharmacyId }: Props) {
       } catch (error) {
         console.error(error)
         toast.error("please try again")
+        setLoading("done")
       }
 
   }
@@ -157,6 +161,7 @@ export default function FileUploader({ pharmacyId }: Props) {
          <div className="w-[50%] rounded">
            {capture && (
            <>
+            <span className="text-xs text-red-500 leading-4">**for high accuracy, camera should be close to the prescription form**</span>
             <Webcam
               audio={false}
               height={300}
@@ -168,7 +173,9 @@ export default function FileUploader({ pharmacyId }: Props) {
             <div className="flex flex-row items-center gap-3">
              <Button className="bg-blue text-white
               hover:bg-blue active:bg-blue mt-2 rounded"
+              disabled={loading === "loading"}
               onClick={handleCapture}>
+               {loading === "loading" && <Loader2Icon className="w-4 h-4 mr-2 animate-spin" />}
                Take photo
              </Button>
              <p>

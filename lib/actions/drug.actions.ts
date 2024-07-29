@@ -61,13 +61,13 @@ export const searchDrugsWithText = async (tokens: any) => {
     try {
         await connectToDatabase()
 
-        const regexTokens = tokens.map((token: any) => new RegExp(token, 'i'));
-        const query = { name: { $in: regexTokens } };
+        const regexTokens = tokens.map((token: any) => ({ name: { $regex: new RegExp(token, 'i') }}));
 
-        const drugs = await Drug.find(query)
+        const query = { $or: regexTokens };
+        const drugs = await Drug.find(query);
 
-        if (!drugs) {
-            return JSON.stringify({ error: "drugs not found"})
+        if (!drugs || drugs.length === 0) {
+            return JSON.stringify({ error: "drugs not found" });
         }
 
         return JSON.stringify({
@@ -77,7 +77,8 @@ export const searchDrugsWithText = async (tokens: any) => {
     } catch (error) {
         return JSON.stringify({
             msg: "error fetching drugs from pharmacy",
-            error
+            error,
+            drugs: []
         })
     }
 }
